@@ -109,7 +109,7 @@ package net.rpg.core.display.map
 		 */
 		public static function get getinstance():Map
 		{
-			if ( instance==null )
+			if (instance==null)
 			{
 				instance=new Map(new Private());
 			}
@@ -117,30 +117,18 @@ package net.rpg.core.display.map
 		}
 		/**
 		 * 初始化地图
-		 * @param	id
-		 * @param	width
-		 * @param	height
-		 * @param	cwidth
-		 * @param	cheight
-		 * @param	url
 		 * @param	iis
 		 */
-		public function init(id:int,
-							 width:int,
-							 height:int,
-							 cwidth:int,
-							 cheight:int,
-							 url:String="",
-							 iis:int=2):void
+		public function init(iis:int=2):void
 		{
-			mid = id;
-			mwidth = width;
-			mheight = height;
-			path = url;
+			mid = MapStruct.id;
+			mwidth = MapStruct.width;
+			mheight = MapStruct.height;
+			path = MapStruct.path;
 			maxfocus.x=MapStruct.width-MapStruct.focus.x;
 			maxfocus.y=MapStruct.height-MapStruct.focus.y;
-			this.cwidth = cwidth;
-			this.cheight = cheight;
+			this.cwidth = MapStruct.cwidth;
+			this.cheight = MapStruct.cheight;
 			this.iis = iis;
 			
 		}

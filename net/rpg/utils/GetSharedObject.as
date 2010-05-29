@@ -27,7 +27,7 @@ package net.rpg.utils
 		}
 		public static function get getinstance():GetSharedObject
 		{
-			if ( instance==null )
+			if (instance==null)
 			{
 				instance=new GetSharedObject(new Private());
 			}

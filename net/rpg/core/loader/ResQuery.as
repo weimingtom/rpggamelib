@@ -128,7 +128,7 @@ package net.rpg.core.loader
 		
 		public static function get getinstance():ResQuery
 		{
-			if ( instance==null )
+			if (instance==null)
 			{
 				instance=new ResQuery(new Private());
 			}
@@ -283,7 +283,7 @@ package net.rpg.core.loader
 			query.removeEventListener(Event.COMPLETE,initToRun);
 			query.removeEventListener(IOErrorEvent.IO_ERROR,err);
 			
-			if(GetSharedObject.getinstance.getfield("ResIP")==null)GetSharedObject.getinstance().flushfield("ResIP",ip);
+			if(GetSharedObject.getinstance.getfield("ResIP")==null)GetSharedObject.getinstance.flushfield("ResIP",ip);
 			//TODO
 			listFormat();
 			

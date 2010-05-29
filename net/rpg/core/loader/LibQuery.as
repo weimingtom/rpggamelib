@@ -65,7 +65,7 @@ package net.rpg.core.loader
 		
 		public static function get getinstance():LibQuery
 		{
-			if ( instance==null )
+			if (instance==null)
 			{
 				instance=new LibQuery(new Private());
 			}

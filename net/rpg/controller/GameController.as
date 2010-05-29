@@ -1,6 +1,8 @@
 package net.rpg.controller 
 {
 	import net.rpg.core.display.IGMain;
+	import net.rpg.core.display.layer.FloorLayer;
+	import net.rpg.core.display.layer.UILayer;
 	/**
 	 * ...
 	 * @author 随风展翅
@@ -12,6 +14,7 @@ package net.rpg.controller
 		 * 客户端窗口对象
 		 */
 		private var client:IGMain = null;
+		
 		/**
 		 *单利句柄
 		 */
@@ -31,7 +34,7 @@ package net.rpg.controller
 		 */
 		public static function get getinstance():GameController
 		{
-			if ( instance==null )
+			if (instance==null)
 			{
 				instance=new GameController(new Private());
 			}
@@ -45,6 +48,8 @@ package net.rpg.controller
 		public function init(gmain:IGMain):void
 		{
 			client = gmain;
+			client.addChild(FloorLayer.getinstance);
+			client.addChild(UILayer.getinstance);
 		}
 	}
 

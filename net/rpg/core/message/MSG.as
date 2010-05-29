@@ -28,7 +28,7 @@ package net.rpg.core.message
 		 */
 		public static function get getinstance():MSG
 		{
-			if ( instance==null )
+			if (instance==null)
 			{
 				instance=new MSG(new Private());
 			}

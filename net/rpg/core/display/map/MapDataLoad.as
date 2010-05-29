@@ -71,7 +71,7 @@ package net.rpg.core.display.map
 		 */
 		public static function get getinstance():MapDataLoad
 		{
-			if ( instance==null )
+			if (instance==null)
 			{
 				instance=new MapDataLoad(new Private());
 			}
