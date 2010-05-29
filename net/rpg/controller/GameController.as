@@ -29,7 +29,7 @@ package net.rpg.controller
 		 * @return 
 		 * 
 		 */
-		public static function getinstance():GameController
+		public static function get getinstance():GameController
 		{
 			if ( instance==null )
 			{

@@ -69,7 +69,7 @@ package net.rpg.core.display.map
 		 * @return 
 		 * 
 		 */
-		public static function getinstance():MapDataLoad
+		public static function get getinstance():MapDataLoad
 		{
 			if ( instance==null )
 			{
@@ -107,7 +107,7 @@ package net.rpg.core.display.map
 			}
 			if(counter>=LOADSIZE){
 				counter=0;
-				ViewFacade.getInstance().dispatchNotification(MAPDATA_CP);
+				ViewFacade.getInstance.dispatchNotification(MAPDATA_CP);
 			}
 		}
 		

@@ -107,7 +107,7 @@ package net.rpg.core.display.map
 		 * @return 
 		 * 
 		 */
-		public static function getinstance():Map
+		public static function get getinstance():Map
 		{
 			if ( instance==null )
 			{

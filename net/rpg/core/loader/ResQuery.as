@@ -126,7 +126,7 @@ package net.rpg.core.loader
 			query.addEventListener(IOErrorEvent.IO_ERROR,err);
 		}
 		
-		public static function getinstance():ResQuery
+		public static function get getinstance():ResQuery
 		{
 			if ( instance==null )
 			{
@@ -211,7 +211,7 @@ package net.rpg.core.loader
 			if(ondata==false){
 				if(query.data==null)throw new Error("初始化XML字符数据为空!");
 				_xml = new XML(query.data);
-				ip=GetSharedObject.getinstance().getfield("ResIP");
+				ip=GetSharedObject.getinstance.getfield("ResIP");
 				if(ip){
 					//TODO
 					listFormat();
@@ -283,7 +283,7 @@ package net.rpg.core.loader
 			query.removeEventListener(Event.COMPLETE,initToRun);
 			query.removeEventListener(IOErrorEvent.IO_ERROR,err);
 			
-			if(GetSharedObject.getinstance().getfield("ResIP")==null)GetSharedObject.getinstance().flushfield("ResIP",ip);
+			if(GetSharedObject.getinstance.getfield("ResIP")==null)GetSharedObject.getinstance().flushfield("ResIP",ip);
 			//TODO
 			listFormat();
 			
@@ -376,7 +376,7 @@ package net.rpg.core.loader
 			
 			lObj = tempList.shift();
 			
-			LibQuery.getinstance().onLoad(onTopLoad,lObj);
+			LibQuery.getinstance.onLoad(onTopLoad,lObj);
 			
 		}
 		

@@ -63,7 +63,7 @@ package net.rpg.core.loader
 			time.addEventListener(TimerEvent.TIMER,timeOut);
 		}
 		
-		public static function getinstance():LibQuery
+		public static function get getinstance():LibQuery
 		{
 			if ( instance==null )
 			{

@@ -25,7 +25,7 @@ package net.rpg.utils
 			so = SharedObject.getLocal("sys");
 			if(so!=null)so.addEventListener(AsyncErrorEvent.ASYNC_ERROR,onerr);
 		}
-		public static function getinstance():GetSharedObject
+		public static function get getinstance():GetSharedObject
 		{
 			if ( instance==null )
 			{
