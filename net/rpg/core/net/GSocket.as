@@ -71,7 +71,7 @@ package net.rpg.core.net
 		 */
 		private function onConnect(e:Event):void
 		{
-			
+			trace(_ip,":连接成");
 		}
 		/**
 		 * IO错误
@@ -79,8 +79,7 @@ package net.rpg.core.net
 		 */
 		private function ioErr(e:IOErrorEvent):void
 		{
-			
-			
+			trace(_ip,":IO",e.text);
 		}
 		/**
 		 * 安全沙箱错误
@@ -88,7 +87,7 @@ package net.rpg.core.net
 		 */
 		private function securityError(e:SecurityErrorEvent):void
 		{
-			
+			trace(_ip,":安全沙箱");
 		}
 		/**
 		 * 收到数据
@@ -96,7 +95,7 @@ package net.rpg.core.net
 		 */
 		private function onData(e:ProgressEvent):void
 		{
-			
+			trace(_ip,":数据");
 		}
 	}
 

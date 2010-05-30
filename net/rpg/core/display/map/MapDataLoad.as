@@ -140,8 +140,9 @@ package net.rpg.core.display.map
 				delete unitList[key];
 				
 			}
-			if(unitFDB!=null)unitFDB.loader.unload();
-			if(tileFDB!=null)tileFDB.clear();
+			if (unitFDB != null) { unitFDB.loader.unloadAndStop(); trace("unitFDB"); }
+			if (tileFDB != null) { tileFDB.clear(); trace("tileFDB"); }
+			
 		}
 		
 		/**
