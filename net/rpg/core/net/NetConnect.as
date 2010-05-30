@@ -14,10 +14,17 @@ package net.rpg.core.net
 		 */
 		private static var instance:NetConnect = null;
 		
+		/**
+		 * 临时服务器名
+		 */
 		private var sname:String = "";
-		
+		/**
+		 * 链接数
+		 */
 		private var length:int = 0;
-		
+		/**
+		 * 链接句柄
+		 */
 		private var Hsock:Dictionary = null;
 		/**=========================================消息开始==================================================**/
 		
