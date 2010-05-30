@@ -1,9 +1,5 @@
 package net.rpg.core.display.map 
 {
-	import com.qngame.tlzf.display.LoaderBar;
-	import com.qngame.tlzf.facades.ViewFacade;
-	import com.qngame.tlzf.utils.GetClass;
-	
 	import flash.display.BitmapData;
 	import flash.display.Loader;
 	import flash.display.LoaderInfo;
@@ -15,6 +11,8 @@ package net.rpg.core.display.map
 	import flash.utils.ByteArray;
 	import flash.utils.Dictionary;
 	import flash.utils.getQualifiedClassName;
+	import net.rpg.core.message.MSG;
+	import net.rpg.utils.GetClass;
 
 	/**
 	 *地图数据加载 
@@ -23,8 +21,6 @@ package net.rpg.core.display.map
 	 */
 	public class MapDataLoad
 	{
-		
-		public static const MAPDATA_CP:String="mapdata_cp";
 		
 		private static const LOADSIZE:int=2;
 		/**
@@ -38,14 +34,20 @@ package net.rpg.core.display.map
 		
 		private var counter:int=0;
 		
-		private var lb:LoaderBar=null;
-		
 		private var tileFDB:ByteArray=null;
 		
 		private var unitFDB:LoaderInfo=null;
 		
-		private var unitList:Dictionary=new Dictionary();
+		private var unitList:Dictionary = new Dictionary();
 		
+		/**=========================================消息开始==================================================**/
+		
+		/**
+		 * 加载完成
+		 */
+		public static const MD_MAP_LOAD_COMPLETE:String = "md_map_load_complete";
+		
+		/**=========================================消息结束==================================================**/
 		
 		public function MapDataLoad(access:Private)
 		{
@@ -80,15 +82,13 @@ package net.rpg.core.display.map
 		
 		/**
 		 *开始加载 
-		 * @param tilep 地图数据
-		 * @param unitp 地图遮挡资源
 		 * 
 		 */
-		public function load(tilep:String,unitp:String):void
+		public function load():void
 		{
 			destroy();
-			urlLoad.load(new URLRequest(tilep));
-			swfLoad.load(new URLRequest(unitp));
+			urlLoad.load(new URLRequest(MapStruct.tilef));
+			swfLoad.load(new URLRequest(MapStruct.unitf));
 		}
 		
 		/**
@@ -107,7 +107,7 @@ package net.rpg.core.display.map
 			}
 			if(counter>=LOADSIZE){
 				counter=0;
-				ViewFacade.getInstance.dispatchNotification(MAPDATA_CP);
+				MSG.getinstance.dispatch(MD_MAP_LOAD_COMPLETE);
 			}
 		}
 		

@@ -42,7 +42,17 @@ package net.rpg.core.display.map
 		/**
 		 *地图路径 
 		 */
-		public static var path:String="";
+		public static var path:String = "";
+		
+		/**
+		 * 遮挡数据
+		 */
+		public static var tilef:String = "";
+		
+		/**
+		 * 遮挡资源
+		 */
+		public static var unitf:String = "";
 		
 		/**
 		 *地图上边框转换后的坐标

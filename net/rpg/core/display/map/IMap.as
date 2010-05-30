@@ -15,16 +15,10 @@ package net.rpg.core.display.map
 		
 		/**
 		 * 初始化场景数据 
-		 * @param id        地图id
-		 * @param width		地图宽度
-		 * @param height	地图高度
-		 * @param cwidth	客户端宽度
-		 * @param cheight	客户端高度
-		 * @param url		地图的加载地址
 		 * @param iis		队列并发加载数
 		 * 
 		 */
-		function init(id:int,width:int,height:int,cwidth:int,cheight:int,url:String="",iis:int=2):void;
+		function init(iis:int=2):void;
 		
 		/**
 		 * 设置被添加的显示列表
