@@ -1,7 +1,12 @@
 package net.rpg.core.display.layer 
 {
 	import net.rpg.core.display.Gobj;
-	
+	import net.rpg.core.message.MSG;
+	import org.aswing.AsWingManager;
+	import org.aswing.event.AWEvent;
+	import org.aswing.FlowLayout;
+	import org.aswing.JButton;
+	import org.aswing.JFrame;
 	/**
 	 * ...
 	 * @author 随风展翅
@@ -21,6 +26,7 @@ package net.rpg.core.display.layer
 			{
 				throw new Error("no access the Class");
 			}
+			init();
 		}
 		/**
 		 *获取实例 
@@ -34,6 +40,33 @@ package net.rpg.core.display.layer
 				instance=new UILayer(new Private());
 			}
 			return instance;
+		}
+		/**
+		 * 初始化GUI
+		 */
+		private function init():void
+		{
+			AsWingManager.initAsStandard(this);
+			
+			var f:JFrame = new JFrame(this, "GUI控制面板");
+			var initmap:JButton = new JButton("GM_MAP_INIT");
+			initmap.addActionListener(onclick);
+			
+			var mapok:JButton = new JButton("GM_MAP_INIT_COMPLETE");
+			
+			
+			var playerinfo:JButton = new JButton("GOM_PLAYER_INFO");
+			
+			
+			f.setSizeWH(400, 300);
+			f.getContentPane().setLayout(new FlowLayout());
+			f.getContentPane().appendAll(initmap,mapok,playerinfo);
+			f.show();
+		}
+		
+		private function onclick(e:AWEvent):void
+		{
+			MSG.getinstance.dispatch("gm_map_init",0);
 		}
 	}
 

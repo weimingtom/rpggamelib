@@ -22,7 +22,7 @@ package net.rpg.core.display
 		private function start():void
 		{
 			GameController.getinstance.init(this);
-			GameManager.getinstance;
+			GameManager.getinstance.initmsg();
 		}
 	}
 
