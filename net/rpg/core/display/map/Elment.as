@@ -86,7 +86,7 @@ package net.rpg.core.display.map
 		 */
 		public function destroy():void
 		{
-			unloadAndStop
+			unloadAndStop();
 		}
 	}
 }
