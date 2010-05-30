@@ -14,6 +14,10 @@ package net.rpg.core.net
 		 */
 		private static var instance:NetConnect = null;
 		
+		private var sname:String = "";
+		
+		private var length:int = 0;
+		
 		private var Hsock:Dictionary = null;
 		/**=========================================消息开始==================================================**/
 		
@@ -52,8 +56,26 @@ package net.rpg.core.net
 		 */
 		public function createSockte(ip:String,port:int):void
 		{
-			if((typeof Hsock[ip])=="object" && Hsock[ip].port==port) throw new Error("Socket:" + ip + " Socket创建失败,该连接已存在");
-			Hsock[ip] = new GSocket(ip,port);
+			sname = ip + port;
+			if((typeof Hsock[sname])=="object") throw new Error("Socket:" + ip + " Socket创建失败,该连接已存在");
+			Hsock[sname] = new GSocket(ip, port);
+			length++;
+		}
+		/**
+		 * 关闭Socket连接 只有一个连接的情况下可不传递参数
+		 * @param	ip
+		 * @param	port
+		 */
+		public function close(ip:String="",port:int=0):void
+		{
+			if (length > 1) {
+				if (ip == "" || port == 0) throw new Error("Socket:Socket连接数大于1请传递参数");
+				sname = ip + port;
+			}
+			if (Hsock[sname] == "undefined" || Hsock[sname] == null) throw new Error("Socket:" + ip + "Socket关闭失败,该连接不存在");
+			Hsock[sname].netClose();
+			Hsock[sname] = null;
+			delete Hsock[sname];
 		}
 		
 		

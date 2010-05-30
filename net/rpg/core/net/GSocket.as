@@ -56,7 +56,14 @@ package net.rpg.core.net
 			addEventListener(IOErrorEvent.IO_ERROR, ioErr);
 			addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityError);
 			addEventListener(ProgressEvent.SOCKET_DATA, onData);
+			addEventListener(Event.CLOSE, onClose);
 		}
+		
+		public function netClose():void
+		{
+			close();
+		}
+		
 		/**
 		 * 地址返回
 		 */
@@ -96,6 +103,14 @@ package net.rpg.core.net
 		private function onData(e:ProgressEvent):void
 		{
 			trace(_ip,":数据");
+		}
+		/**
+		 * 关闭连接
+		 * @param	e
+		 */
+		private function onClose(e:Event):void
+		{
+			trace(_ip,":关闭");
 		}
 	}
 
