@@ -3,7 +3,8 @@
 	import flash.display.LoaderInfo;
 	/**
 	 * ...
-	 * @author 曹贤 QQ:343717442
+	 * @author 曹贤 
+	 * QQ:343717442
 	 */
 	public class GetClass 
 	{
