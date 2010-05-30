@@ -1,0 +1,89 @@
+﻿<config>
+	<!--选择服务器-->
+	<server>
+		<http url="http://192.168.1.250/" file="hubaosen.html" />
+	</server>
+	<maps>
+		<map id="0" width="3328" height="2560" fixwidth="64" fixheight="80" path="tt" tilef="0.cjm?version=1.0" unitf="0.swf?version=1.0" text="新手村" />
+		<map id="1" width="3328" height="3072" fixwidth="64" fixheight="96" path="map/yucun" tilef="1.cjm?version=1.0" unitf="1.swf?version=1.0" text="大鱼吃" />
+	</maps>
+	<!--游戏资源-->
+	<resources>
+		<!--顶层-->
+		<top>
+		
+		
+			<!--系统需要的类型封包-->
+			<syspack>
+				<rs id="UI" path="caoni.swf?version=1.0" txt="ui" />
+				<rs id="formation" path="formation.swf?version=1.0" txt="formation" />
+				<rs id="aaa" path="aaa.swf?version=1.0" txt="kong" />
+				<rs id="0" path="js1.swf?version=1.0" txt="asd" />
+				<rs id="1" path="wq.swf?version=1.0" txt="asd" />
+			</syspack>
+			
+			
+			
+			<!--美术绘图资源包-->
+			<drawpack>
+				<rs id="jses1" path="js1.swf?version=1.0" txt="啊随风哦" />
+			</drawpack>
+			
+			
+			
+			<!--美术动画资源包-->
+			<!--<filmpack>
+				<rs id="1" path="ff.txt?version=1.0" txt="啊哦份额噶" />
+			</filmpack>-->
+			
+			
+			
+			
+			<!--文本类型数据包-->
+			<!--<binpack>
+				<rs id="npcLanguage" path="gg.txt.swf?version=1.0" txt="上的份额却" />
+			</binpack>-->
+			
+			
+			
+		</top>
+		<!--及时加载-->
+		<betimes>
+		
+		
+			<!--系统需要的类型封包-->
+			<syspack>
+				<rs id="UI" path="data/ui.swf?version=1.0" />
+				<rs id="face" path="data/ui.swf?version=1.0" />
+			</syspack>
+			
+			
+			
+			
+			<!--美术绘图资源包-->
+			<drawpack>
+				<rs id="001" path="data/ui.swf?version=1.0" />
+				<rs id="002" path="data/ui.swf?version=1.0" />
+				<rs id="003" path="data/ui.swf?version=1.0" />
+			</drawpack>
+			
+			
+			
+			
+			<!--美术动画资源包-->
+			<filmpack>
+				<rs id="011" path="data/ui.swf?version=1.0" />
+			</filmpack>
+			
+			
+			
+			
+			<!--文本类型数据包-->
+			<binpack>
+				<rs id="npcLanguage" path="data/ui.swf?version=1.0"/>
+			</binpack>
+			
+			
+		</betimes>
+	</resources>
+</config>
