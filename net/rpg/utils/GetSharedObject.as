@@ -10,12 +10,16 @@ package net.rpg.utils
 	 */
 	public class GetSharedObject
 	{
+		/**
+		 * 单例句柄
+		 */
 		private static var instance:GetSharedObject=null;
 		
 		/**
 		 *so实例 
 		 */
-		private var so:SharedObject=null;
+		private var so:SharedObject = null;
+		
 		public function GetSharedObject(access:Private)
 		{
 			if(access==null)
@@ -25,6 +29,11 @@ package net.rpg.utils
 			so = SharedObject.getLocal("sys");
 			if(so!=null)so.addEventListener(AsyncErrorEvent.ASYNC_ERROR,onerr);
 		}
+		/**
+		 *获取实例 
+		 * @return 
+		 * 
+		 */
 		public static function get getinstance():GetSharedObject
 		{
 			if (instance==null)
