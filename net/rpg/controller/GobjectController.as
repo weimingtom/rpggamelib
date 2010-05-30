@@ -11,7 +11,14 @@ package net.rpg.controller
 		 *单利句柄
 		 */
 		private static var instance:GobjectController = null;
-			
+		
+		
+		/**=========================================消息开始==================================================**/
+		//public static const RQ_LOADE_OK:String = "rq_loade_ok";
+		
+		/**=========================================消息结束==================================================**/
+		
+		
 		public function GobjectController(access:Private)
 		{
 			if(access==null)

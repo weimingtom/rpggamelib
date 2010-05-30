@@ -20,6 +20,12 @@ package net.rpg.controller
 		 */
 		private static var instance:GameController = null;
 		
+		
+		/**=========================================消息开始==================================================**/
+		//public static const RQ_LOADE_OK:String = "rq_loade_ok";
+		
+		/**=========================================消息结束==================================================**/
+		
 		public function GameController(access:Private)
 		{
 			if(access==null)

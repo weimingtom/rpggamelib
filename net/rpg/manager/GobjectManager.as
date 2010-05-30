@@ -12,6 +12,14 @@ package net.rpg.manager
 		 */
 		private static var instance:GobjectManager = null;
 		
+		
+		
+		
+		/**=========================================消息开始==================================================**/
+		//public static const RQ_LOADE_OK:String = "rq_loade_ok";
+		
+		/**=========================================消息结束==================================================**/
+		
 		public function GobjectManager(access:Private) 
 		{
 			if(access==null)
@@ -32,7 +40,13 @@ package net.rpg.manager
 			}
 			return instance;
 		}
-		
+		/**
+		 * 初始化消息监听
+		 */
+		public function initmsg():void
+		{
+			
+		}
 	}
 
 }class Private{}
