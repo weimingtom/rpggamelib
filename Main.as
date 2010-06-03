@@ -23,6 +23,7 @@
 			removeEventListener(Event.ADDED_TO_STAGE, init);
 			game = new GMain();
 			addChild(game);
+			
 		}
 		
 	}
