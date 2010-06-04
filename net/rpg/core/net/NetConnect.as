@@ -85,6 +85,15 @@ package net.rpg.core.net
 			delete Hsock[sname];
 		}
 		
+		public function getNet(ip:String = "", port:int = 0):GSocket
+		{
+			if (length > 1) {
+				if (ip == "" || port == 0) throw new Error("Socket:Socket连接数大于1请传递参数");
+				sname = ip + port;
+			}
+			if (Hsock[sname] == "undefined" || Hsock[sname] == null) throw new Error("Socket:" + ip + "Socket获取失败,该连接不存在");
+			return Hsock[sname];
+		}
 		
 	}
 
