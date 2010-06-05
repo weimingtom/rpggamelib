@@ -24,8 +24,8 @@ package net.rpg.core.display
 		{
 			GameController.getinstance.init(this);
 			GameManager.getinstance.initmsg();
-			NetConnect.getinstance.createSockte("192.168.1.250", 2018);
-			//NetConnect.getinstance.getNet().writeUTF("cjmxp");
+			NetConnect.getinstance.createSockte("192.168.1.3", 2018);
+			
 		}
 	}
 

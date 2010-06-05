@@ -2,6 +2,7 @@ package net.rpg.core.display.layer
 {
 	import net.rpg.core.display.Gobj;
 	import net.rpg.core.message.MSG;
+	import net.rpg.core.net.NetConnect;
 	import org.aswing.AsWingManager;
 	import org.aswing.event.AWEvent;
 	import org.aswing.FlowLayout;
@@ -53,7 +54,7 @@ package net.rpg.core.display.layer
 			initmap.addActionListener(onclick);
 			
 			var mapok:JButton = new JButton("GM_MAP_INIT_COMPLETE");
-			
+			mapok.addActionListener(click);
 			
 			var playerinfo:JButton = new JButton("GOM_PLAYER_INFO");
 			
@@ -66,7 +67,12 @@ package net.rpg.core.display.layer
 		
 		private function onclick(e:AWEvent):void
 		{
-			MSG.getinstance.dispatch("gm_map_init",0);
+			MSG.getinstance.dispatch("gm_map_init", 0);
+		}
+		private function click(e:AWEvent):void
+		{
+			NetConnect.getinstance.getNet().writeUTF("c");
+			NetConnect.getinstance.getNet().flush();
 		}
 	}
 
