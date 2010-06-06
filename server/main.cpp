@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <string.h>
 #include "Winsock2.h"
 #pragma comment (lib,"WS2_32.lib")
 using namespace std;
@@ -33,8 +34,6 @@ int main(int argc,char* argv[]){
 	tcpddr.sin_family = AF_INET;
 	tcpddr.sin_addr.s_addr = inet_addr("0.0.0.0"); 
 	tcpddr.sin_port = htons(2018);
-
-
 
 	hand = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL,0,0);
 	if(hand==NULL){
@@ -127,7 +126,7 @@ DWORD WINAPI WorkerThread(LPVOID pVoid)
 		}
 	ExitThread(0);
 	return 0;
-	}
+	} 
 
 void IssueRead(struct _OVERLAPPELUS *pCntx)
 	{
