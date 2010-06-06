@@ -59,7 +59,7 @@ int main(int argc,char* argv[]){
 		OVERLAPPELUS.socket=WSAAccept(server,(SOCKADDR *) &client, &clientSize,NULL,0);
 		cout<<"ÓÃ»§:"<<inet_ntoa(client.sin_addr)<<endl;
 		aa[i]=OVERLAPPELUS;
-		CreateIoCompletionPort((HANDLE)OVERLAPPELUS.socket,hand,(DWORD)&OVERLAPPELUS,0);
+		CreateIoCompletionPort((HANDLE)OVERLAPPELUS.socket,hand,(ULONG_PTR)&OVERLAPPELUS,0);
 		IssueRead(&OVERLAPPELUS);
 		i++;
 
@@ -69,6 +69,7 @@ int main(int argc,char* argv[]){
 
 	PostQueuedCompletionStatus(hand,0,NULL,NULL);
 	closesocket(server);
+	CloseHandle(hand);
 	return 0;
 	}
 
