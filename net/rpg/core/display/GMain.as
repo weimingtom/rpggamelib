@@ -3,8 +3,6 @@ package net.rpg.core.display
 	import net.rpg.controller.GameController;
 	import net.rpg.core.loader.ResQuery;
 	import net.rpg.core.message.MSG;
-	import net.rpg.core.net.NetConnect;
-	import net.rpg.manager.GameManager;
 	/**
 	 * ...
 	 * @author 随风展翅
@@ -23,8 +21,6 @@ package net.rpg.core.display
 		private function start():void
 		{
 			GameController.getinstance.init(this);
-			GameManager.getinstance.initmsg();
-			NetConnect.getinstance.createSockte("192.168.1.3", 2018);
 			
 		}
 	}

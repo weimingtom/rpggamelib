@@ -3,6 +3,7 @@ package net.rpg.controller
 	import net.rpg.core.display.IGMain;
 	import net.rpg.core.display.layer.FloorLayer;
 	import net.rpg.core.display.layer.UILayer;
+	import net.rpg.manager.GameManager;
 	/**
 	 * ...
 	 * @author 随风展翅
@@ -20,11 +21,6 @@ package net.rpg.controller
 		 */
 		private static var instance:GameController = null;
 		
-		
-		/**=========================================消息开始==================================================**/
-		//public static const RQ_LOADE_OK:String = "rq_loade_ok";
-		
-		/**=========================================消息结束==================================================**/
 		
 		public function GameController(access:Private)
 		{
@@ -53,6 +49,8 @@ package net.rpg.controller
 		 */
 		public function init(gmain:IGMain):void
 		{
+			GameManager.getinstance.initmsg();
+			NetController.getinstance.init();
 			client = gmain;
 			client.addChild(FloorLayer.getinstance);
 			client.addChild(UILayer.getinstance);
