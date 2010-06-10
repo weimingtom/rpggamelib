@@ -71,7 +71,7 @@ package net.rpg.core.display.layer
 		}
 		private function click(e:AWEvent):void
 		{
-			NetConnect.getinstance.getNet().writeUTF("c");
+			NetConnect.getinstance.getNet().writeUTFBytes("a");
 			NetConnect.getinstance.getNet().flush();
 		}
 	}
