@@ -52,6 +52,7 @@ package net.rpg.core.net
 			super(gip, gport);
 			_ip = gip;
 			_port = gport;
+			
 			addEventListener(Event.CONNECT, onConnect);
 			addEventListener(IOErrorEvent.IO_ERROR, ioErr);
 			addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityError);

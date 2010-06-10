@@ -87,8 +87,13 @@ workThread(workthread)
 		else
 		{
 			cout<<"接收:"<<endl;
+			short s=NULL;
 			
 			printf("recv data from client: %s\n", pClient->szBuffer);
+			memmove(&s,&pClient->szBuffer,sizeof(s));
+			if(s==10010){
+				cout<<"成功"<<endl;
+			}
 			WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,ptrOverlapped,NULL);
 			
 		}

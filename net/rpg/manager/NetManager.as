@@ -73,11 +73,14 @@ package net.rpg.manager
 		/**
 		 * 登陆服务器
 		 */
-		private function login(user:String,pwd:String,word:int=00010):void
+		private function login(user:String,pwd:String,word:int=10010):void
 		{
 			var db:ByteArray = new ByteArray();
+			db.endian = "littleEndian";
 			db.writeShort(word);
+			trace(MD5.hash(user));
 			db.writeUTFBytes(MD5.hash(user));
+			trace(MD5.hash(pwd));
 			db.writeUTFBytes(MD5.hash(pwd));
 			NetConnect.getinstance.getNet().writeBytes(db);
 			NetConnect.getinstance.getNet().flush();
