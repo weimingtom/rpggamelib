@@ -18,7 +18,6 @@ public:
 	~Iocp(void);
 	bool init(int port=2012);
 	bool startup();
-
 	friend workThread(workthread);
 
 };
