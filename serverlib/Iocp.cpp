@@ -67,11 +67,11 @@ workThread(workthread)
 	DWORD recvSize = 0;
 	BOOL bResult;
 	// 客户端
-	CInfo* pClient=new CInfo();
+	CInfo* pClient;/*=new CInfo();*/
 	while (true){
 
 		// 等待I/O完成
-		bResult=GetQueuedCompletionStatus(iocp->iocp,&recvSize,(PULONG_PTR)pClient,&ptrOverlapped,INFINITE);
+		bResult=GetQueuedCompletionStatus(iocp->iocp,&recvSize,(PULONG_PTR)&pClient,&ptrOverlapped,INFINITE);
 		if (bResult == FALSE && ptrOverlapped == NULL)
 		{
 			printf("WorkerThread - GetQueuedCompletionStatus()错误.\n");
@@ -82,11 +82,15 @@ workThread(workthread)
 		else if (recvSize == 0)
 		{    
 			closesocket(pClient->client);
-			fprintf(stderr, "用户已经退出.\n");
+			cout<<"用户已经退出"<<endl;
 		}
 		else
 		{
+			cout<<"接收:"<<endl;
+			
+			printf("recv data from client: %s\n", pClient->szBuffer);
 			WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,ptrOverlapped,NULL);
+			
 		}
 	}
 	ExitThread(0);
