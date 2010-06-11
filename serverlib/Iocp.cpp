@@ -1,4 +1,12 @@
 #include "Iocp.h"
+#include "action.h"
+
+Iocp Iocp::Instance;
+
+Iocp & Iocp::getInstance()
+{
+	return Instance;
+}
 
 Iocp::Iocp(void)
 {
@@ -90,9 +98,10 @@ workThread(workthread)
 			short s=NULL;
 			
 			printf("recv data from client: %s\n", pClient->szBuffer);
-			memmove(&s,&pClient->szBuffer,sizeof(s));
+			memmove(&s,pClient->szBuffer,sizeof(s));
 			if(s==10010){
 				cout<<"³É¹¦"<<endl;
+				funcMap[100](pClient->szBuffer);
 			}
 			WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,ptrOverlapped,NULL);
 			

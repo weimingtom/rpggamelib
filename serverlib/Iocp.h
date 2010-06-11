@@ -11,14 +11,17 @@ class Iocp
 {
 private:
 	Cnet server;
+	static Iocp Instance;
 public:
 	HANDLE iocp;
 public:
-	Iocp(void);
 	~Iocp(void);
 	bool init(int port=2012);
 	bool startup();
 	friend workThread(workthread);
+	static Iocp & getInstance();
+private:
+	Iocp(void);
 
 };
 #endif
