@@ -20,6 +20,7 @@ public:
 	bool startup();
 	friend workThread(workthread);
 	static Iocp & getInstance();
+	void write(CInfo*);
 private:
 	Iocp(void);
 

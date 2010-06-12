@@ -57,12 +57,22 @@ bool Iocp::startup(){
 		memset(&pClient->overlapped,0,sizeof(pClient->overlapped));
 		pClient->wsaBuf.len = NET_MAX_RECV_SIZE;
 		pClient->wsaBuf.buf = pClient->szBuffer;
+		pClient->type=true;
 		// 接收数据
 		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
 		cout<<"用户:"<<server.getip()<<"连接"<<endl;
 	}
 	return false;
 	cout<<"工作线程结束"<<endl;
+}
+void Iocp::write(CInfo * info)
+{
+	// 接收的字节数
+	DWORD recvSize = 0;
+	info->wsaBuf.len = strlen(info->czBuffer);
+	info->wsaBuf.buf = info->czBuffer;
+	
+	::WSASend(info->client,&info->wsaBuf,1,&recvSize,0,&info->overlapped,NULL);
 }
 workThread(workthread)
 {
@@ -92,20 +102,25 @@ workThread(workthread)
 			closesocket(pClient->client);
 			cout<<"用户已经退出"<<endl;
 		}
-		else
-		{
-			cout<<"接收:"<<endl;
+			
+		
+			
+		
 			short s=NULL;
 			
-			printf("recv data from client: %s\n", pClient->szBuffer);
 			memmove(&s,pClient->szBuffer,sizeof(s));
-			if(s==10010){
-				cout<<"成功"<<endl;
-				funcMap[100](pClient->szBuffer);
-			}
-			WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,ptrOverlapped,NULL);
 			
-		}
+				if(s==10010){
+					
+					cout<<"成功"<<endl;
+					funcMap[100](pClient);
+					//memset(&(pClient->szBuffer),0,sizeof(pClient->szBuffer));
+					continue;
+				}
+			
+		printf("recv data from client: %s\n", pClient->szBuffer);
+		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
+		
 	}
 	ExitThread(0);
 	return 0;

@@ -5,6 +5,7 @@ package net.rpg.core.net
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.Socket;
+	import flash.utils.ByteArray;
 	
 	/**
 	 * ...
@@ -52,7 +53,7 @@ package net.rpg.core.net
 			super(gip, gport);
 			_ip = gip;
 			_port = gport;
-			
+			endian = "littleEndian";
 			addEventListener(Event.CONNECT, onConnect);
 			addEventListener(IOErrorEvent.IO_ERROR, ioErr);
 			addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityError);
@@ -103,7 +104,9 @@ package net.rpg.core.net
 		 */
 		private function onData(e:ProgressEvent):void
 		{
-			trace(_ip,":数据");
+			trace(_ip, ":数据");
+			trace(readShort());
+			
 		}
 		/**
 		 * 关闭连接

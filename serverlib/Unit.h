@@ -6,9 +6,11 @@
 #include <process.h>
 #include "Winsock2.h"
 #include <map>
+#include "CInfo.h"
+
 #pragma comment (lib,"WS2_32.lib")
 #define SIOCP Iocp::getInstance()
 using namespace std;
-typedef void(*action)(char*);
+typedef void(*action)(CInfo*);
 typedef map<short,action> Maps;
 #endif
