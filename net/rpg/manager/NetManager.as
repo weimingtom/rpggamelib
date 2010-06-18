@@ -71,7 +71,7 @@ package net.rpg.manager
 		 */
 		private function connect():void
 		{
-			NetConnect.getinstance.createSockte("192.168.1.3", 2012);
+			NetConnect.getinstance.createSockte("192.168.1.100", 2012);
 			MSG.getinstance.remove(NetManager.NM_TO_CONNECT);
 		}
 		/**
@@ -82,9 +82,9 @@ package net.rpg.manager
 			var db:GByteArray = new GByteArray();
 			db.endian = "littleEndian";
 			db.writeShort(word);
-			trace(MD5.hash(user));
+			//trace(MD5.hash(user));
 			db.writeUTFBytes(MD5.hash(user));
-			trace(MD5.hash(pwd));
+			//trace(MD5.hash(pwd));
 			db.writeUTFBytes(MD5.hash(pwd));
 			NetConnect.getinstance.getNet().writeBytes(db);
 			NetConnect.getinstance.getNet().flush();
@@ -103,9 +103,9 @@ package net.rpg.manager
 			var db:GByteArray = new GByteArray();
 			db.endian = "littleEndian";
 			db.writeShort(word);
-			trace(MD5.hash(user));
+			//trace(MD5.hash(user));
 			db.writeUTFBytes(MD5.hash(user));
-			trace(MD5.hash(pwd));
+			//trace(MD5.hash(pwd));
 			db.writeUTFBytes(MD5.hash(pwd));
 			NetConnect.getinstance.getNet().writeBytes(db);
 			NetConnect.getinstance.getNet().flush();
