@@ -4,6 +4,7 @@
 #include "Thread.h"
 #include "CInfo.h"
 #include "Cnet.h"
+#include "MSGManager.h"
 
 #define __INIT_NET_ENVIR__ int nError;WSADATA wsaData;if((nError=WSAStartup(MAKEWORD(2,2),&wsaData))!=0){cout<<"Æô¶¯WinSocketÊ§°Ü!"<<endl;return false;}
 

@@ -1,5 +1,4 @@
 #include "Iocp.h"
-#include "action.h"
 
 Iocp Iocp::Instance;
 
@@ -15,6 +14,9 @@ Iocp::Iocp(void)
 Iocp::~Iocp(void)
 {
 }
+/************************************************************************/
+/* 初始化套接字
+/************************************************************************/
 bool Iocp::init(int port)
 {
 	__INIT_NET_ENVIR__
@@ -23,19 +25,19 @@ bool Iocp::init(int port)
 		cout<<"套接字创建失败"<<endl;
 		return false;
 	}
-	cout<<"套接字创建完成"<<endl;
 	if(server.bind()==false){
 		cout<<"端口绑定失败"<<endl;
 		return false;
 	}
-	cout<<"端口绑定成功"<<endl;
 	if(server.listen()==false){
 		cout<<"套接字监听失败"<<endl;
 		return false;
 	}
-	cout<<"套接字监听成功"<<endl;
 	return true;
 }
+/************************************************************************/
+/* 启动服务器
+/************************************************************************/
 bool Iocp::startup(){
 
 	// 接收的字节数
@@ -58,7 +60,7 @@ bool Iocp::startup(){
 		// 创建重叠I/O信息结构
 		memset(&pClient->overlapped,0,sizeof(pClient->overlapped));
 		pClient->wsaBuf.len = NET_MAX_RECV_SIZE;
-		pClient->wsaBuf.buf = pClient->szBuffer;
+		pClient->wsaBuf.buf = pClient->zBuffer;
 		pClient->iocpType=IOCP_READ;
 		// 接收数据
 		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
@@ -67,12 +69,18 @@ bool Iocp::startup(){
 	return false;
 	cout<<"工作线程结束"<<endl;
 }
+/************************************************************************/
+/* 输出
+/************************************************************************/
 void Iocp::write(CInfo * info)
 {
 	// 接收的字节数
 	DWORD recvSize = 0;
 	::WSASend(info->client,&info->wsaBuf,1,&recvSize,0,&info->overlapped,NULL);
 }
+/************************************************************************/
+/* 工作线程
+/************************************************************************/
 workThread(workthread)
 {
 	Iocp* iocp = (Iocp*)param;
@@ -108,25 +116,23 @@ workThread(workthread)
 		switch (pClient->iocpType)
 		{
 			case IOCP_READ:
-
-				memmove(&s,pClient->zBuffer,sizeof(s));
-
-				printf("recv data from client: %s\n", pClient->zBuffer);
-				if(s==10010){
-					pClient->iocpType=IOCP_WRITE;
-				}
+				
+				//memmove(&s,pClient->zBuffer,sizeof(s));
+				//printf("recv data from client: %s\n", pClient->zBuffer);
+				//if(s==10010){
+				//	pClient->iocpType=IOCP_WRITE;
+				//}
+				//ZeroMemory(pClient->zBuffer, 1024);
+				
+				MSGM.msgListener(pClient);
+				
 				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
 				
 			break;
 			case IOCP_WRITE:
-
 				
-				if(s==10010){
-					cout<<"成功"<<endl;
-					funcMap[100](pClient);
-					pClient->iocpType=IOCP_READ;
-					
-				}
+				printf("发送数据: %s\n", pClient->zBuffer);
+				
 			break;
 			default:
 				//We should never be reaching here, under normal circumstances.

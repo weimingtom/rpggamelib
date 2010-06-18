@@ -27,7 +27,6 @@ package net.rpg.manager
 		 * 登陆服务器
 		 */
 		public static const NM_TO_LOGIN:String = "nm_to_login";
-		public static const NM_TO_LOGINS:String = "nm_to_logins";
 		
 		/**=========================================消息结束==================================================**/
 		
@@ -59,7 +58,6 @@ package net.rpg.manager
 		{
 			MSG.getinstance.listens(NetManager.NM_TO_CONNECT, connect);
 			MSG.getinstance.listens(NetManager.NM_TO_LOGIN, login);
-			MSG.getinstance.listens(NetManager.NM_TO_LOGINS, logins);
 			
 			
 		}
@@ -78,27 +76,6 @@ package net.rpg.manager
 		 * 登陆服务器
 		 */
 		private function login(user:String,pwd:String,word:int=10010):void
-		{
-			var db:ByteArray = new ByteArray();
-			db.endian = "littleEndian";
-			db.writeShort(word);
-			trace(MD5.hash(user));
-			db.writeUTFBytes(MD5.hash(user));
-			trace(MD5.hash(pwd));
-			db.writeUTFBytes(MD5.hash(pwd));
-			NetConnect.getinstance.getNet().writeBytes(db);
-			NetConnect.getinstance.getNet().flush();
-			db.clear();
-			db = null;
-			/**
-			 * NetConnect.getinstance.getNet().writeBoolean(false);
-			 * NetConnect.getinstance.getNet().flush();
-			 */
-		}
-		/**
-		 * 登陆服务器
-		 */
-		private function logins(user:String,pwd:String,word:int=10015):void
 		{
 			var db:ByteArray = new ByteArray();
 			db.endian = "littleEndian";
