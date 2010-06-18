@@ -74,7 +74,6 @@ bool Iocp::startup(){
 /************************************************************************/
 void Iocp::write(CInfo * info)
 {
-	// 接收的字节数
 	DWORD recvSize = 0;
 	::WSASend(info->client,&info->wsaBuf,1,&recvSize,0,&info->overlapped,NULL);
 }
@@ -123,15 +122,17 @@ workThread(workthread)
 				//	pClient->iocpType=IOCP_WRITE;
 				//}
 				//ZeroMemory(pClient->zBuffer, 1024);
-				
+				printf("收到数据: %s\n", pClient->zBuffer);
 				MSGM.msgListener(pClient);
-				
+				pClient->wsaBuf.len=NET_MAX_RECV_SIZE;
 				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
 				
 			break;
 			case IOCP_WRITE:
 				
 				printf("发送数据: %s\n", pClient->zBuffer);
+				ZeroMemory(pClient->zBuffer,NET_MAX_RECV_SIZE);
+				pClient->iocpType=IOCP_READ;
 				
 			break;
 			default:

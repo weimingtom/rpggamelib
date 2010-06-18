@@ -86,7 +86,7 @@ package net.rpg.core.display.layer
 					MSG.getinstance.dispatch(NetManager.NM_TO_CONNECT);
 				break;
 				case "mapok":
-					
+					MSG.getinstance.dispatch(NetManager.NM_TO_LOGINS,user.getText(),pwd.getText());
 				break;
 				case "post":
 					MSG.getinstance.dispatch(NetManager.NM_TO_LOGIN,user.getText(),pwd.getText());

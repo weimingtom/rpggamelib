@@ -10,10 +10,10 @@ void login(CInfo *cinfo){
 	
 	memcpy(uses,cinfo->zBuffer+2,32);
 	memcpy(pwds,cinfo->zBuffer+34,32);
-	memcpy(db,&ss,sizeof(ss));
-
-	//memset(db+2,1,2);
+	memcpy(db,&ss,2);
+	ZeroMemory(cinfo->zBuffer,NET_MAX_RECV_SIZE);
 	memcpy(cinfo->zBuffer,db,2);
-	//cinfo->czBuffer[3]='\0';
-	//SIOCP.write(cinfo);
+	cinfo->wsaBuf.len=2;
+	cinfo->iocpType=IOCP_WRITE;
+	SIOCP.write(cinfo);
 }
