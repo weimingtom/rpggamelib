@@ -1,8 +1,8 @@
 package net.rpg.manager 
 {
-	import flash.utils.ByteArray;
 	import net.rpg.core.message.MSG;
 	import net.rpg.core.net.NetConnect;
+	import net.rpg.utils.GByteArray;
 	import net.rpg.utils.md5.MD5;
 	/**
 	 * ...
@@ -79,7 +79,7 @@ package net.rpg.manager
 		 */
 		private function login(user:String,pwd:String,word:int=10010):void
 		{
-			var db:ByteArray = new ByteArray();
+			var db:GByteArray = new GByteArray();
 			db.endian = "littleEndian";
 			db.writeShort(word);
 			trace(MD5.hash(user));
@@ -100,7 +100,7 @@ package net.rpg.manager
 		 */
 		private function logins(user:String,pwd:String,word:int=10015):void
 		{
-			var db:ByteArray = new ByteArray();
+			var db:GByteArray = new GByteArray();
 			db.endian = "littleEndian";
 			db.writeShort(word);
 			trace(MD5.hash(user));
