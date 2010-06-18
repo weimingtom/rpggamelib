@@ -13,6 +13,10 @@ Cnet::~Cnet(void)
 bool Cnet::CreateSocket()
 {
 	socket = ::WSASocket(AF_INET,SOCK_STREAM,0,NULL,0,WSA_FLAG_OVERLAPPED);
+	if (INVALID_SOCKET==socket)
+	{
+		return false;
+	}
 	return true;
 }
 /************************************************************************/
@@ -20,6 +24,7 @@ bool Cnet::CreateSocket()
 /************************************************************************/
 bool Cnet::bind(const unsigned short port)
 {
+	ZeroMemory((char *)&addr, sizeof(addr));
 	addr.sin_family = AF_INET;
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	addr.sin_port = htons(port);

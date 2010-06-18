@@ -10,8 +10,8 @@ public:
 	CInfo()
 	{
 		nLastOffset = 0;
-		memset(szBuffer,0,NET_BUFFER_SIZE);
-		memset(czBuffer,0,NET_BUFFER_SIZE);
+		memset(zBuffer,0,NET_BUFFER_SIZE);
+		
 	}
 	inline CInfo operator =(SOCKET s){
 		client=s;
@@ -20,9 +20,8 @@ public:
 	SOCKET client;
 	OVERLAPPED overlapped;
 	WSABUF wsaBuf;
-	bool type;
+	int iocpType;
 	unsigned int nLastOffset;			// 偏移地址
-	char szBuffer[NET_BUFFER_SIZE];		// 接收缓冲区
-	char czBuffer[NET_BUFFER_SIZE];
+	char zBuffer[NET_BUFFER_SIZE];		// 接收缓冲区
 };
 #endif

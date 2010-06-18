@@ -10,7 +10,12 @@
 
 #pragma comment (lib,"WS2_32.lib")
 #define SIOCP Iocp::getInstance()
+#define IOCP_READ 1
+#define IOCP_WRITE 2
 using namespace std;
 typedef void(*action)(CInfo*);
 typedef map<short,action> Maps;
+
+
+
 #endif

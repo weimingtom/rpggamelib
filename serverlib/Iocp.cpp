@@ -23,15 +23,17 @@ bool Iocp::init(int port)
 		cout<<"套接字创建失败"<<endl;
 		return false;
 	}
+	cout<<"套接字创建完成"<<endl;
 	if(server.bind()==false){
 		cout<<"端口绑定失败"<<endl;
 		return false;
 	}
+	cout<<"端口绑定成功"<<endl;
 	if(server.listen()==false){
 		cout<<"套接字监听失败"<<endl;
 		return false;
 	}
-
+	cout<<"套接字监听成功"<<endl;
 	return true;
 }
 bool Iocp::startup(){
@@ -57,7 +59,7 @@ bool Iocp::startup(){
 		memset(&pClient->overlapped,0,sizeof(pClient->overlapped));
 		pClient->wsaBuf.len = NET_MAX_RECV_SIZE;
 		pClient->wsaBuf.buf = pClient->szBuffer;
-		pClient->type=true;
+		pClient->iocpType=IOCP_READ;
 		// 接收数据
 		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
 		cout<<"用户:"<<server.getip()<<"连接"<<endl;
@@ -69,9 +71,6 @@ void Iocp::write(CInfo * info)
 {
 	// 接收的字节数
 	DWORD recvSize = 0;
-	info->wsaBuf.len = strlen(info->czBuffer);
-	info->wsaBuf.buf = info->czBuffer;
-	
 	::WSASend(info->client,&info->wsaBuf,1,&recvSize,0,&info->overlapped,NULL);
 }
 workThread(workthread)
@@ -86,6 +85,7 @@ workThread(workthread)
 	BOOL bResult;
 	// 客户端
 	CInfo* pClient;/*=new CInfo();*/
+	short s=NULL;
 	while (true){
 
 		// 等待I/O完成
@@ -96,31 +96,42 @@ workThread(workthread)
 		}else if (bResult == FALSE && ptrOverlapped != NULL)
 		{
 			cout<<"用户非正常退出"<<endl;
+
 		}
 		else if (recvSize == 0)
 		{    
 			closesocket(pClient->client);
 			cout<<"用户已经退出"<<endl;
+			continue;
 		}
-			
-		
-			
-		
-			short s=NULL;
-			
-			memmove(&s,pClient->szBuffer,sizeof(s));
-			
+
+		switch (pClient->iocpType)
+		{
+			case IOCP_READ:
+
+				memmove(&s,pClient->zBuffer,sizeof(s));
+
+				printf("recv data from client: %s\n", pClient->zBuffer);
 				if(s==10010){
-					
+					pClient->iocpType=IOCP_WRITE;
+				}
+				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
+				
+			break;
+			case IOCP_WRITE:
+
+				
+				if(s==10010){
 					cout<<"成功"<<endl;
 					funcMap[100](pClient);
-					//memset(&(pClient->szBuffer),0,sizeof(pClient->szBuffer));
-					continue;
+					pClient->iocpType=IOCP_READ;
+					
 				}
-			
-		printf("recv data from client: %s\n", pClient->szBuffer);
-		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
-		
+			break;
+			default:
+				//We should never be reaching here, under normal circumstances.
+			break;
+		}
 	}
 	ExitThread(0);
 	return 0;

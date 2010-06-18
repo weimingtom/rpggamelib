@@ -59,9 +59,10 @@ package net.rpg.core.display.layer
 			enter.name = "enter";
 			enter.addActionListener(click);
 			var initmap:JButton = new JButton("GM_MAP_INIT");
-			
-			var mapok:JButton = new JButton("GM_MAP_INIT_COMPLETE");
+			//GM_MAP_INIT_COMPLETE
+			var mapok:JButton = new JButton("发送2");
 			mapok.name = "mapok";
+			mapok.addActionListener(click);
 			var playerinfo:JButton = new JButton("GOM_PLAYER_INFO");
 			
 			user = new JTextField("test001",15);
@@ -85,7 +86,7 @@ package net.rpg.core.display.layer
 					MSG.getinstance.dispatch(NetManager.NM_TO_CONNECT);
 				break;
 				case "mapok":
-				
+					MSG.getinstance.dispatch(NetManager.NM_TO_LOGINS,user.getText(),pwd.getText());
 				break;
 				case "post":
 					MSG.getinstance.dispatch(NetManager.NM_TO_LOGIN,user.getText(),pwd.getText());
