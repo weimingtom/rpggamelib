@@ -18,9 +18,7 @@ public:
 		return *this;
 	};
 	SOCKET client;
-	OVERLAPPED overlapped;
 	WSABUF wsaBuf;
-	int iocpType;
 	unsigned int nLastOffset;			// 偏移地址
 	char zBuffer[NET_BUFFER_SIZE];		// 接收缓冲区
 };

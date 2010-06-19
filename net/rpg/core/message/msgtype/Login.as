@@ -56,28 +56,28 @@ package net.rpg.core.message.msgtype
 		/**
 		 * 登陆服务器
 		 */
-		private function login(user:String,pwd:String,word:int=10010):void
+		private function login(user:String,pwd:String):void
 		{
-			var db:GByteArray = new GByteArray();
-			db.endian = "littleEndian";
-			db.writeShort(word);
+			var cdb:GByteArray = new GByteArray();
+			cdb.writeShort(int(MessageType.CMT_LOGIN));
 			//trace(MD5.hash(user));
-			db.writeUTFBytes(MD5.hash(user));
+			cdb.writeUTFBytes(MD5.hash(user));
 			//trace(MD5.hash(pwd));
-			db.writeUTFBytes(MD5.hash(pwd));
-			NetConnect.getinstance.getNet().writeBytes(db);
+			cdb.writeUTFBytes(MD5.hash(pwd));
+			NetConnect.getinstance.getNet().writeBytes(cdb);
 			NetConnect.getinstance.getNet().flush();
-			db.clear();
-			db = null;
+			cdb.clear();
+			cdb = null;
 			/**
 			 * NetConnect.getinstance.getNet().writeBoolean(false);
 			 * NetConnect.getinstance.getNet().flush();
 			 */
 		}
-		private function isLogin(db:GByteArray):void
+		private function isLogin(sdb:GByteArray):void
 		{
-			db.position = 0;
-			var islg:int = db.readUnsignedByte();
+			var cdb:GByteArray = new GByteArray();
+			sdb.position = 0;
+			var islg:int = sdb.readUnsignedByte();
 			switch(islg) {
 				case 0:
 					
@@ -89,7 +89,7 @@ package net.rpg.core.message.msgtype
 				
 				break;
 				case 3:
-				
+					
 				break;
 			}
 		}

@@ -58,12 +58,12 @@ bool Iocp::startup(){
 		// 关联新接入来的socket和与创建好的完成端口,并传递一个套接字信息结构
 		CreateIoCompletionPort((HANDLE)pClient->client,iocp,(ULONG_PTR)pClient,0);
 		// 创建重叠I/O信息结构
-		memset(&pClient->overlapped,0,sizeof(pClient->overlapped));
+		//memset(&pClient->overlapped,0,sizeof(pClient->overlapped));
 		pClient->wsaBuf.len = NET_MAX_RECV_SIZE;
 		pClient->wsaBuf.buf = pClient->zBuffer;
-		pClient->iocpType=IOCP_READ;
+		//pClient->iocpType=IOCP_READ;
 		// 接收数据
-		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
+		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&(IoRead.Overlapped),NULL);
 		cout<<"用户:"<<server.getip()<<"连接"<<endl;
 	}
 	return false;
@@ -75,7 +75,7 @@ bool Iocp::startup(){
 void Iocp::write(CInfo * info)
 {
 	DWORD recvSize = 0;
-	::WSASend(info->client,&info->wsaBuf,1,&recvSize,0,&info->overlapped,NULL);
+	::WSASend(info->client,&info->wsaBuf,1,&recvSize,0,&IoWrite.Overlapped,NULL);
 }
 /************************************************************************/
 /* 工作线程
@@ -92,6 +92,7 @@ workThread(workthread)
 	BOOL bResult;
 	// 客户端
 	CInfo* pClient;/*=new CInfo();*/
+	iodb* iodbtype=NULL;
 	short s=NULL;
 	while (true){
 
@@ -111,8 +112,8 @@ workThread(workthread)
 			cout<<"用户已经退出"<<endl;
 			continue;
 		}
-
-		switch (pClient->iocpType)
+		iodbtype=(iodb *)ptrOverlapped;
+		switch (iodbtype->ioType)
 		{
 			case IOCP_READ:
 				
@@ -125,14 +126,14 @@ workThread(workthread)
 				printf("收到数据: %s\n", pClient->zBuffer);
 				MSGM.msgListener(pClient);
 				pClient->wsaBuf.len=NET_MAX_RECV_SIZE;
-				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&pClient->overlapped,NULL);
+				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&IoRead.Overlapped,NULL);
 				
 			break;
 			case IOCP_WRITE:
 				
 				printf("发送数据: %s\n", pClient->zBuffer);
 				ZeroMemory(pClient->zBuffer,NET_MAX_RECV_SIZE);
-				pClient->iocpType=IOCP_READ;
+				
 				
 			break;
 			default:

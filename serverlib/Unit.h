@@ -11,6 +11,10 @@
 #include "CInfo.h"
 
 #pragma comment (lib,"WS2_32.lib")
+typedef struct{
+	OVERLAPPED Overlapped;
+	int ioType;
+}iodb,* lp_iodb;
 #define SIOCP Iocp::getInstance()
 #define MSGM MSGManager::getInstance()
 #define IOCP_READ 1
@@ -19,6 +23,8 @@ using namespace std;
 typedef void(*action)(CInfo*);
 typedef map<short,action> Maps;
 extern Maps funcMap;
+extern iodb IoRead;
+extern iodb IoWrite;
 
 
 #endif
