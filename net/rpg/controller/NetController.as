@@ -1,5 +1,6 @@
 package net.rpg.controller 
 {
+	import net.rpg.core.message.msgtype.Login;
 	import net.rpg.manager.NetManager;
 	/**
 	 * ...
@@ -24,7 +25,6 @@ package net.rpg.controller
 				throw new Error("no access the Class");
 			}
 		}
-		
 		/**
 		 *获取实例 
 		 * @return 
@@ -38,12 +38,23 @@ package net.rpg.controller
 			}
 			return instance;
 		}
-		
+		/**
+		 * 初始化操作
+		 */
 		public function init():void
 		{
 			NetManager.getinstance.initmsg();
+			
+			
+			listenMT();
 		}
-		
+		/**
+		 * 启动要监听消息
+		 */
+		private function listenMT():void
+		{
+			Login.getinstance.initmsg();
+		}
 	}
 
 }class Private{}

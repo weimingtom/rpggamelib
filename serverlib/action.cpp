@@ -7,7 +7,7 @@ void login(CInfo *cinfo){
 	char pwds[32];
 	char db[2];
 	short msgtype=10011;
-	char isok=0;
+	unsigned char isok=0;
 	
 	memcpy(uses,cinfo->zBuffer+2,32);
 	memcpy(pwds,cinfo->zBuffer+34,32);

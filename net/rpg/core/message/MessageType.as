@@ -8,15 +8,40 @@ package net.rpg.core.message
 	public class MessageType
 	{
 		/**
+		 * 连接服务器
+		 * 无参数
+		 */
+		public static const CMT_CONNECT:String = "10000";
+		/**
 		 * 登陆
-		 * 消息2 账号32 密码32
+		 * 消息(2) 账号(32) 密码(32)
 		 **/
-		public static const CMT_LOGIN = 10010;
+		public static const CMT_LOGIN:String = "10010";
 		/**
 		 * 返回登陆状态
-		 * 消息2 状体1
+		 * 消息(2) 状体(UChar1)   0为密码错误 1用户名错误 2为验证码错误 3为登陆成功
 		 */
-		public static const SMT_LOGIN = 10011;
+		public static const SMT_LOGIN:String = "10011";
+		/**
+		 * 请求选择角色
+		 * 参数无
+		 */
+		public static const CMT_GET_SELECT_ROLE:String = "10012";
+		/**
+		 * 返回选择列表
+		 * 消息(2) 角色的个数(1) [ID(UInt4) 种族(UChar1) 性别(UChar1) 名称(14)]
+		 */
+		public static const SMT_POST_SELECT_ROLE:String = "10013";
+		/**
+		 * 选择成功
+		 * 消息(2) 角色ID(UInt4)
+		 */
+		public static const CMT_SLECT_ROLE_OK:String = "10014";
+		/**
+		 * 角色所在地图
+		 * 消息(2) 地图ID(UChar1)
+		 */
+		public static const SMT_POST_MAPID:String = "10015";
 	}
 
 }

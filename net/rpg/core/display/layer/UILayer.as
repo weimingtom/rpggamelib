@@ -1,8 +1,8 @@
 package net.rpg.core.display.layer 
 {
 	import net.rpg.core.display.Gobj;
+	import net.rpg.core.message.MessageType;
 	import net.rpg.core.message.MSG;
-	import net.rpg.manager.NetManager;
 	import org.aswing.AsWingManager;
 	import org.aswing.event.AWEvent;
 	import org.aswing.FlowLayout;
@@ -83,13 +83,13 @@ package net.rpg.core.display.layer
 		{
 			switch(e.currentTarget.name) {
 				case "enter":
-					MSG.getinstance.dispatch(NetManager.NM_TO_CONNECT);
+					MSG.getinstance.dispatch(MessageType.CMT_CONNECT);
 				break;
 				case "mapok":
-					MSG.getinstance.dispatch(NetManager.NM_TO_LOGINS,user.getText(),pwd.getText());
+					
 				break;
 				case "post":
-					MSG.getinstance.dispatch(NetManager.NM_TO_LOGIN,user.getText(),pwd.getText());
+					MSG.getinstance.dispatch(MessageType.CMT_LOGIN,user.getText(),pwd.getText());
 				break;
 				
 			}
