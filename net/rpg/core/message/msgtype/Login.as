@@ -83,13 +83,13 @@ package net.rpg.core.message.msgtype
 					
 				break;
 				case 1:
-				
+					
 				break;
 				case 2:
-				
+					
 				break;
 				case 3:
-					
+					trace(3);
 				break;
 			}
 		}

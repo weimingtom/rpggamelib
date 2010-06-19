@@ -125,6 +125,7 @@ workThread(workthread)
 				//ZeroMemory(pClient->zBuffer, 1024);
 				printf("收到数据: %s\n", pClient->zBuffer);
 				MSGM.msgListener(pClient);
+				ZeroMemory(pClient->zBuffer,NET_MAX_RECV_SIZE);
 				pClient->wsaBuf.len=NET_MAX_RECV_SIZE;
 				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&IoRead.Overlapped,NULL);
 				
