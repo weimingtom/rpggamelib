@@ -15,6 +15,13 @@ typedef struct{
 	OVERLAPPED Overlapped;
 	int ioType;
 }iodb,* lp_iodb;
+typedef struct 
+{
+	unsigned int  id;
+	unsigned char race;
+	unsigned char sex;
+	char		* name;
+}roleinfo,RoleInfo[3];
 #define SIOCP Iocp::getInstance()
 #define MSGM MSGManager::getInstance()
 #define IOCP_READ 1
@@ -22,6 +29,8 @@ typedef struct{
 using namespace std;
 typedef void(*action)(CInfo*);
 typedef map<short,action> Maps;
+typedef map<unsigned int,RoleInfo> RLIList;
+extern RLIList rlList;
 extern Maps funcMap;
 extern iodb IoRead;
 extern iodb IoWrite;

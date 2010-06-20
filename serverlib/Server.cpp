@@ -1,6 +1,7 @@
 #include "Iocp.h"
 #include "action.h"
 Maps funcMap;
+RLIList rlList;
 iodb IoRead;
 iodb IoWrite;
 
