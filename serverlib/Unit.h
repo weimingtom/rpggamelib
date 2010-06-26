@@ -21,7 +21,11 @@ typedef struct
 	unsigned char race;
 	unsigned char sex;
 	char		* name;
-}roleinfo,RoleInfo[3];
+}roleinfo,*RoleInfo;
+typedef struct
+{
+	RoleInfo info [200];
+}riArr,*RiArr;
 #define SIOCP Iocp::getInstance()
 #define MSGM MSGManager::getInstance()
 #define IOCP_READ 1
@@ -29,7 +33,7 @@ typedef struct
 using namespace std;
 typedef void(*action)(CInfo*);
 typedef map<short,action> Maps;
-typedef map<unsigned int,RoleInfo> RLIList;
+typedef map<unsigned int,RiArr> RLIList;
 extern RLIList rlList;
 extern Maps funcMap;
 extern iodb IoRead;
