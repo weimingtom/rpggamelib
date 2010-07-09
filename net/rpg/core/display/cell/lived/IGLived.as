@@ -39,7 +39,7 @@ package net.rpg.core.display.cell.lived
 		/**
 		 * 销毁对象
 		 */
-		public function destroy():void
+		function destroy():void;
 	}
 	
 }

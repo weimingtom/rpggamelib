@@ -6,7 +6,7 @@
 #include <process.h>
 #include "Winsock2.h"
 #include <map>
-
+#include <vector>
 
 #include "CInfo.h"
 

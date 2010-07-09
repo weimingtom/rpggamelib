@@ -1,5 +1,6 @@
 package net.rpg.core.display.cell 
 {
+	import flash.geom.Point;
 	
 	/**
 	 * ...
