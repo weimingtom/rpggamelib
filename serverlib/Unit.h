@@ -13,7 +13,7 @@
 #pragma comment (lib,"WS2_32.lib")
 typedef struct{
 	OVERLAPPED Overlapped;
-	int ioType;
+	int ioType = 0;
 }iodb,* lp_iodb;
 typedef struct 
 {
@@ -36,8 +36,6 @@ typedef map<short,action> Maps;
 typedef map<unsigned int,RiArr> RLIList;
 extern RLIList rlList;
 extern Maps funcMap;
-extern iodb IoRead;
-extern iodb IoWrite;
 
 
 #endif

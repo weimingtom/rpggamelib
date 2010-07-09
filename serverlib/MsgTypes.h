@@ -8,6 +8,7 @@ class MsgTypes
 		~MsgTypes(void);
 		static MsgTypes & getInstance();
 		int initPond(int);
+		lp_iodb getiodb();
 	private:
 		MsgTypes(void);
 	private:

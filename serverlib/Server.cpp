@@ -2,8 +2,6 @@
 #include "action.h"
 Maps funcMap;
 RLIList rlList;
-iodb IoRead;
-iodb IoWrite;
 
 
 void run(){
@@ -11,8 +9,6 @@ void run(){
 	SIOCP.startup();
 }
 int main(int argc, char *argv[]){
-	IoRead.ioType=IOCP_READ;
-	IoWrite.ioType=IOCP_WRITE;
 	
 //=============================ÏûÏ¢º¯ÊýÓ³Éä==============================
 	MSGM.msgRegister(10010,login);

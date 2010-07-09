@@ -12,9 +12,13 @@ int MsgTypes::initPond(int num=20)
 	
 	for (int i=0;i<num;i++)
 	{
-		MTPond.push_back(new iodb);
+		MTPond.push_back(new iodb());
 	}
 	return num;
+}
+lp_iodb MsgTypes::getiodb()
+{
+	
 }
 MsgTypes::MsgTypes(void){
 	
