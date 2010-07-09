@@ -1,5 +1,5 @@
 #include "Iocp.h"
-
+#include "MsgTypes.h"
 Iocp Iocp::Instance;
 
 Iocp & Iocp::getInstance()
@@ -63,7 +63,8 @@ bool Iocp::startup(){
 		pClient->wsaBuf.buf = pClient->zBuffer;
 		//pClient->iocpType=IOCP_READ;
 		// 接收数据
-		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&(IoRead.Overlapped),NULL);
+		lp_iodb IoRead = MsgTypes::getInstance().getiodbR();
+		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&(IoRead->Overlapped),NULL);
 		cout<<"用户:"<<server.getip()<<"连接"<<endl;
 	}
 	return false;
@@ -75,7 +76,8 @@ bool Iocp::startup(){
 void Iocp::write(CInfo * info)
 {
 	DWORD recvSize = 0;
-	::WSASend(info->client,&info->wsaBuf,1,&recvSize,0,&IoWrite.Overlapped,NULL);
+	lp_iodb IoWrite = MsgTypes::getInstance().getiodbW();
+	::WSASend(info->client,&info->wsaBuf,1,&recvSize,0,&IoWrite->Overlapped,NULL);
 }
 /************************************************************************/
 /* 工作线程
@@ -94,6 +96,7 @@ workThread(workthread)
 	CInfo* pClient;/*=new CInfo();*/
 	iodb* iodbtype=NULL;
 	short s=NULL;
+	lp_iodb IoRead;
 	while (true){
 
 		// 等待I/O完成
@@ -113,6 +116,7 @@ workThread(workthread)
 			continue;
 		}
 		iodbtype=(iodb *)ptrOverlapped;
+		iodbtype->ioType=0;
 		switch (iodbtype->ioType)
 		{
 			case IOCP_READ:
@@ -127,7 +131,8 @@ workThread(workthread)
 				MSGM.msgListener(pClient);
 				ZeroMemory(pClient->zBuffer,NET_MAX_RECV_SIZE);
 				pClient->wsaBuf.len=NET_MAX_RECV_SIZE;
-				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&IoRead.Overlapped,NULL);
+				IoRead = MsgTypes::getInstance().getiodbR();
+				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&IoRead->Overlapped,NULL);
 				
 			break;
 			case IOCP_WRITE:
