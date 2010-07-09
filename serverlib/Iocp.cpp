@@ -63,7 +63,7 @@ bool Iocp::startup(){
 		pClient->wsaBuf.buf = pClient->zBuffer;
 		//pClient->iocpType=IOCP_READ;
 		// 接收数据
-		lp_iodb IoRead = MsgTypes::getInstance().getiodbR();
+		lp_iodb IoRead =MSG.getInstance().getiodbR();
 		WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&(IoRead->Overlapped),NULL);
 		cout<<"用户:"<<server.getip()<<"连接"<<endl;
 	}
@@ -76,7 +76,7 @@ bool Iocp::startup(){
 void Iocp::write(CInfo * info)
 {
 	DWORD recvSize = 0;
-	lp_iodb IoWrite = MsgTypes::getInstance().getiodbW();
+	lp_iodb IoWrite = MSG.getInstance().getiodbW();
 	::WSASend(info->client,&info->wsaBuf,1,&recvSize,0,&IoWrite->Overlapped,NULL);
 }
 /************************************************************************/
@@ -131,7 +131,7 @@ workThread(workthread)
 				MSGM.msgListener(pClient);
 				ZeroMemory(pClient->zBuffer,NET_MAX_RECV_SIZE);
 				pClient->wsaBuf.len=NET_MAX_RECV_SIZE;
-				IoRead = MsgTypes::getInstance().getiodbR();
+				IoRead = MSG.getInstance().getiodbR();
 				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&IoRead->Overlapped,NULL);
 				
 			break;

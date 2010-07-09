@@ -28,6 +28,7 @@ typedef struct
 }riArr,*RiArr;
 #define SIOCP Iocp::getInstance()
 #define MSGM MSGManager::getInstance()
+#define MSG MsgTypes::getInstance()
 #define IOCP_READ 1
 #define IOCP_WRITE 2
 using namespace std;

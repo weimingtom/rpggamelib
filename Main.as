@@ -6,7 +6,7 @@
 	
 	/**
 	 * ...
-	 * @author 随风展翅 
+	 * @author 随风展翅
 	 * QQ:343717442
 	 */
 	public class Main extends Sprite 
