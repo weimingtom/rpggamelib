@@ -24,7 +24,7 @@ typedef struct
 }roleinfo,*RoleInfo;
 typedef struct
 {
-	RoleInfo info [200];
+	RoleInfo info [4];
 }riArr,*RiArr;
 #define SIOCP Iocp::getInstance()
 #define MSGM MSGManager::getInstance()
