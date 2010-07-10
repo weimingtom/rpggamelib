@@ -23,8 +23,12 @@ lp_iodb MsgTypes::getiodbR()
 	lp_iodb type=NULL;
 	for (unsigned int i=0;i<MTPond.size();i++)
 	{
-		if(MTPond[i]->ioType==0)type=MTPond[i];
-		break;
+		if(MTPond[i]->ioType==0)
+		{
+			type=MTPond[i];
+			type->ioType=IOCP_READ;
+			break;
+		}
 	}
 	if (type==NULL)
 	{
@@ -39,8 +43,12 @@ lp_iodb MsgTypes::getiodbW()
 	lp_iodb type=NULL;
 	for (unsigned int i=0;i<MTPond.size();i++)
 	{
-		if(MTPond[i]->ioType==0)type=MTPond[i];
-		break;
+		if(MTPond[i]->ioType==0)
+		{
+			type=MTPond[i];
+			type->ioType=IOCP_WRITE;
+			break;
+		}
 	}
 	if (type==NULL)
 	{

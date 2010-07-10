@@ -116,34 +116,29 @@ workThread(workthread)
 			continue;
 		}
 		iodbtype=(iodb *)ptrOverlapped;
-		iodbtype->ioType=0;
 		switch (iodbtype->ioType)
 		{
 			case IOCP_READ:
-				
-				//memmove(&s,pClient->zBuffer,sizeof(s));
-				//printf("recv data from client: %s\n", pClient->zBuffer);
-				//if(s==10010){
-				//	pClient->iocpType=IOCP_WRITE;
-				//}
-				//ZeroMemory(pClient->zBuffer, 1024);
+
+				iodbtype->ioType=0;
 				printf("收到数据: %s\n", pClient->zBuffer);
 				MSGM.msgListener(pClient);
 				ZeroMemory(pClient->zBuffer,NET_MAX_RECV_SIZE);
 				pClient->wsaBuf.len=NET_MAX_RECV_SIZE;
+				
 				IoRead = MSG.getInstance().getiodbR();
 				WSARecv(pClient->client,&pClient->wsaBuf,1,&recvSize,&flags,&IoRead->Overlapped,NULL);
 				
 			break;
 			case IOCP_WRITE:
-				
+				iodbtype->ioType=0;
 				printf("发送数据: %s\n", pClient->zBuffer);
 				ZeroMemory(pClient->zBuffer,NET_MAX_RECV_SIZE);
 				
 				
 			break;
 			default:
-				//We should never be reaching here, under normal circumstances.
+				iodbtype->ioType=0;
 			break;
 		}
 	}

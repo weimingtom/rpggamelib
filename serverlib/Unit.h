@@ -13,7 +13,7 @@
 #pragma comment (lib,"WS2_32.lib")
 typedef struct{
 	OVERLAPPED Overlapped;
-	int ioType;
+	unsigned char ioType;
 }iodb,* lp_iodb;
 typedef struct 
 {
