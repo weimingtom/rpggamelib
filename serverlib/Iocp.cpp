@@ -131,10 +131,10 @@ workThread(workthread)
 				
 			break;
 			case IOCP_WRITE:
+
 				iodbtype->ioType=0;
 				printf("·¢ËÍÊý¾Ý: %s\n", pClient->zBuffer);
 				ZeroMemory(pClient->zBuffer,NET_MAX_RECV_SIZE);
-				
 				
 			break;
 			default:
