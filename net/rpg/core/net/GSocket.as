@@ -118,9 +118,11 @@ package net.rpg.core.net
 		{
 			trace(_ip, ":数据");
 			mt = readShort().toString();
+			trace(mt);
 			readBytes(db);
+			trace(db.length);
 			MSG.getinstance.dispatch(mt,db);
-			
+			db.clear();
 		}
 		/**
 		 * 关闭连接

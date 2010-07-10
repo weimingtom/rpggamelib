@@ -52,6 +52,7 @@ package net.rpg.core.message.msgtype
 		{
 			MSG.getinstance.listens(MessageType.CMT_LOGIN, login);
 			MSG.getinstance.listens(MessageType.SMT_LOGIN, isLogin);
+			MSG.getinstance.listens(MessageType.SMT_POST_SELECT_ROLE, selectRole);
 		}
 		/**
 		 * 登陆服务器
@@ -78,6 +79,7 @@ package net.rpg.core.message.msgtype
 			var cdb:GByteArray = new GByteArray();
 			sdb.position = 0;
 			var islg:int = sdb.readUnsignedByte();
+			sdb.clear();
 			switch(islg) {
 				case 0:
 					
@@ -92,6 +94,11 @@ package net.rpg.core.message.msgtype
 					trace(3);
 				break;
 			}
+		}
+		
+		private function selectRole(sdb:GByteArray):void
+		{
+			
 		}
 	}
 
