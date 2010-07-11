@@ -76,10 +76,8 @@ package net.rpg.core.message.msgtype
 		}
 		private function isLogin(sdb:GByteArray):void
 		{
-			var cdb:GByteArray = new GByteArray();
 			sdb.position = 0;
 			var islg:int = sdb.readUnsignedByte();
-			sdb.clear();
 			switch(islg) {
 				case 0:
 					

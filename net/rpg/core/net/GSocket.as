@@ -117,12 +117,11 @@ package net.rpg.core.net
 		private function onData(e:ProgressEvent):void
 		{
 			trace(_ip, ":数据");
-			mt = readShort().toString();
-			trace(mt);
-			readBytes(db);
-			trace(db.length);
-			MSG.getinstance.dispatch(mt,db);
-			db.clear();
+			//mt = readShort().toString();
+			//trace(mt);
+			//readBytes(db);
+			trace(bytesAvailable);
+			//MSG.getinstance.dispatch(mt,db);
 		}
 		/**
 		 * 关闭连接
