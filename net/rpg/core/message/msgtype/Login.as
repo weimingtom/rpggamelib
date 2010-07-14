@@ -76,11 +76,11 @@ package net.rpg.core.message.msgtype
 		}
 		private function isLogin(sdb:GByteArray):void
 		{
-			sdb.position = 0;
+			
 			var islg:int = sdb.readUnsignedByte();
 			switch(islg) {
 				case 0:
-					
+					trace("登陆成功");
 				break;
 				case 1:
 					
@@ -89,14 +89,14 @@ package net.rpg.core.message.msgtype
 					
 				break;
 				case 3:
-					trace(3);
+					
 				break;
 			}
 		}
 		
 		private function selectRole(sdb:GByteArray):void
 		{
-			
+			trace("解析角色");
 		}
 	}
 

@@ -5,8 +5,6 @@ package net.rpg.core.net
 	import flash.events.ProgressEvent;
 	import flash.events.SecurityErrorEvent;
 	import flash.net.Socket;
-	import net.rpg.core.message.MSG;
-	import net.rpg.utils.GByteArray;
 	
 	
 	/**
@@ -24,14 +22,6 @@ package net.rpg.core.net
 		 * 端口
 		 */
 		private var _port:int = 0;
-		/**
-		 * 消息类型
-		 */
-		private var mt:String = "null";
-		/**
-		 * 消息体
-		 */
-		private var db:GByteArray = null;
 		
 		/**=========================================消息开始==================================================**/
 		
@@ -65,7 +55,6 @@ package net.rpg.core.net
 			_ip = gip;
 			_port = gport;
 			endian = "littleEndian";
-			db = new GByteArray();
 			addEventListener(Event.CONNECT, onConnect);
 			addEventListener(IOErrorEvent.IO_ERROR, ioErr);
 			addEventListener(SecurityErrorEvent.SECURITY_ERROR, securityError);
@@ -117,11 +106,7 @@ package net.rpg.core.net
 		private function onData(e:ProgressEvent):void
 		{
 			trace(_ip, ":数据");
-			//mt = readShort().toString();
-			//trace(mt);
-			//readBytes(db);
-			trace(bytesAvailable);
-			//MSG.getinstance.dispatch(mt,db);
+			NetPack.getinstance.getPacks(this);
 		}
 		/**
 		 * 关闭连接
