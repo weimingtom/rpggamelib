@@ -8,20 +8,20 @@
 void login(CInfo *cinfo){
 	char uses[32];
 	char pwds[32];
-	char db[2];
 	unsigned int id;
 	unsigned short msgtype=10011;
+	unsigned short pack=3;
 	unsigned char isok=0;
 	memcpy(uses,cinfo->zBuffer+2,32);
 	memcpy(pwds,cinfo->zBuffer+34,32);
 
 	
 	
-	memcpy(db,&msgtype,2);
 	ZeroMemory(cinfo->zBuffer,NET_MAX_RECV_SIZE);
-	memcpy(cinfo->zBuffer,db,2);
-	memcpy(cinfo->zBuffer+2,&isok,1);
-	cinfo->wsaBuf.len=3;
+	memcpy(cinfo->zBuffer,&pack,2);
+	memcpy(cinfo->zBuffer+2,&msgtype,2);
+	memcpy(cinfo->zBuffer+4,&isok,1);
+	cinfo->wsaBuf.len=5;
 	SIOCP.write(cinfo);
 	id=getLRSL(uses,pwds);
 	postRSL(cinfo,id);
@@ -49,13 +49,13 @@ unsigned int getLRSL(char *use,char *pwd){
 /************************************************************************/
 void postRSL(CInfo *cinfo,unsigned int id){
 
-	char db[2];
+	
 	unsigned char len=0;
 	char bf[4][20];
 	unsigned short msgtype=10012;
-	memcpy(db,&msgtype,2);
+	unsigned short pack=0;
 	ZeroMemory(cinfo->zBuffer,NET_MAX_RECV_SIZE);
-	memcpy(cinfo->zBuffer,db,2);
+	
 	for(char i=0;i<4;i++){
 	rlList[id]->info;
 		if( (rlList[id]->info[i])!=0){
@@ -66,14 +66,15 @@ void postRSL(CInfo *cinfo,unsigned int id){
 			len=len+1;
 		}
 	}
-	
-	memcpy(cinfo->zBuffer,db,2);
-	memcpy(cinfo->zBuffer+2,&len,1);
+	pack=len*20+3;
+	memcpy(cinfo->zBuffer,&pack,2);
+	memcpy(cinfo->zBuffer+2,&msgtype,2);
+	memcpy(cinfo->zBuffer+4,&len,1);
 	for(char i=0;i<len;i++){
-		memcpy(cinfo->zBuffer+3+i*20,&bf[i],20);
+		memcpy(cinfo->zBuffer+5+i*20,&bf[i],20);
 	}
 	
-	cinfo->wsaBuf.len=len*20+3;
+	cinfo->wsaBuf.len=len*20+5;
 	SIOCP.write(cinfo);
 	return;
 }
