@@ -24,7 +24,7 @@ package net.rpg.core.message
 		public static const SMT_LOGIN:String = "10011";
 		/**
 		 * 返回选择列表
-		 * 消息(U2) 角色的个数(1) [ID(UInt4) 种族(UChar1) 性别(UChar1) 名称(14)]
+		 * 消息(U2) 角色的个数(U1) [ID(UInt4) 种族(UChar1) 性别(UChar1) 名称(14)]
 		 */
 		public static const SMT_POST_SELECT_ROLE:String = "10012";
 		/**

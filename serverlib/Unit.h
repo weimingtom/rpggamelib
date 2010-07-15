@@ -7,10 +7,11 @@
 #include "Winsock2.h"
 #include <map>
 #include <vector>
+#pragma comment (lib,"WS2_32.lib")
+using namespace std;
 
 #include "CInfo.h"
 
-#pragma comment (lib,"WS2_32.lib")
 typedef struct{
 	OVERLAPPED Overlapped;
 	unsigned char ioType;
@@ -26,12 +27,14 @@ typedef struct
 {
 	RoleInfo info [4];
 }riArr,*RiArr;
+
+#define U (CUtf8String)
+#define W (CGb2312String)
 #define SIOCP Iocp::getInstance()
 #define MSGM MSGManager::getInstance()
 #define MSG MsgTypes::getInstance()
 #define IOCP_READ 1
 #define IOCP_WRITE 2
-using namespace std;
 typedef void(*action)(CInfo*);
 typedef map<short,action> Maps;
 typedef map<unsigned int,RiArr> RLIList;

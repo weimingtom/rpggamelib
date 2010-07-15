@@ -96,7 +96,17 @@ package net.rpg.core.message.msgtype
 		
 		private function selectRole(sdb:GByteArray):void
 		{
-			trace("解析角色");
+			var len:int = sdb.readUnsignedByte();
+			var arr:Array = [];
+			var obj:Object = {id:0,race:0,sex:0,name:"" };
+			for (var i:int = 0; i < len; i++ ) {
+				obj.id = sdb.readUnsignedInt();
+				obj.race = sdb.readUnsignedByte();
+				obj.sex = sdb.readUnsignedByte();
+				obj.name = sdb.readUTFBytes(14);
+				arr.push(obj);
+			}
+			trace(arr[0].id,arr[0].race,arr[0].sex,arr[0].name);
 		}
 	}
 

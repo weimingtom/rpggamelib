@@ -1,6 +1,7 @@
 #include "action.h"
 #include "Iocp.h"
 #include "Unit.h"
+#include "transform.h"
 /************************************************************************/
 /* 登陆服务器验证
 /************************************************************************/
@@ -37,7 +38,7 @@ unsigned int getLRSL(char *use,char *pwd){
 	riarr=new riArr;
 	memset(riarr->info,0,sizeof(riarr->info));
 	minfo->id=12;
-	minfo->name="随风展翅";
+	minfo->name=U"随风展翅";
 	minfo->race=1;
 	minfo->sex=1;
 	riarr->info[0]=minfo;
@@ -62,7 +63,7 @@ void postRSL(CInfo *cinfo,unsigned int id){
 			memcpy(bf[i],&(rlList[id]->info[i]->id),4);
 			memcpy(bf[i]+4,&(rlList[id]->info[i]->race),1);
 			memcpy(bf[i]+5,&(rlList[id]->info[i]->sex),1);
-			memcpy(bf[i]+6,&(rlList[id]->info[i]->name),14);
+			memcpy(bf[i]+6,(rlList[id]->info[i]->name),14);
 			len=len+1;
 		}
 	}
