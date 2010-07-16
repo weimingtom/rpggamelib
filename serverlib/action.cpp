@@ -10,14 +10,12 @@ void login(CInfo *cinfo){
 	char uses[32];
 	char pwds[32];
 	unsigned int id;
-	unsigned short msgtype=10011;
+	unsigned short msgtype=SMT_LOGIN;
 	unsigned short pack=3;
 	unsigned char isok=0;
 	memcpy(uses,cinfo->zBuffer+2,32);
 	memcpy(pwds,cinfo->zBuffer+34,32);
 
-	
-	
 	ZeroMemory(cinfo->zBuffer,NET_MAX_RECV_SIZE);
 	memcpy(cinfo->zBuffer,&pack,2);
 	memcpy(cinfo->zBuffer+2,&msgtype,2);
@@ -50,10 +48,9 @@ unsigned int getLRSL(char *use,char *pwd){
 /************************************************************************/
 void postRSL(CInfo *cinfo,unsigned int id){
 
-	
 	unsigned char len=0;
 	char bf[4][20];
-	unsigned short msgtype=10012;
+	unsigned short msgtype=SMT_POST_SELECT_ROLE;
 	unsigned short pack=0;
 	ZeroMemory(cinfo->zBuffer,NET_MAX_RECV_SIZE);
 	
@@ -78,4 +75,15 @@ void postRSL(CInfo *cinfo,unsigned int id){
 	cinfo->wsaBuf.len=len*20+5;
 	SIOCP.write(cinfo);
 	return;
+}
+/************************************************************************/
+/* 角色选择完成
+/************************************************************************/
+void selectROK(CInfo *cinfo){
+	unsigned int id;
+	memcpy(&id,cinfo->zBuffer+2,4);
+
+	ZeroMemory(cinfo->zBuffer,NET_MAX_RECV_SIZE);
+
+	cout<<id<<endl;
 }

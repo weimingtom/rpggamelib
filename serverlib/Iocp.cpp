@@ -93,7 +93,7 @@ workThread(workthread)
 	DWORD recvSize = 0;
 	BOOL bResult;
 	// ¿Í»§¶Ë
-	CInfo* pClient;/*=new CInfo();*/
+	CInfo* pClient;
 	iodb* iodbtype=NULL;
 	short s=NULL;
 	lp_iodb IoRead;

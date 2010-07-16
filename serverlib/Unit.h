@@ -11,6 +11,7 @@
 using namespace std;
 
 #include "CInfo.h"
+#include "MsgType.h"
 
 typedef struct{
 	OVERLAPPED Overlapped;
@@ -36,7 +37,7 @@ typedef struct
 #define IOCP_READ 1
 #define IOCP_WRITE 2
 typedef void(*action)(CInfo*);
-typedef map<short,action> Maps;
+typedef map<unsigned short,action> Maps;
 typedef map<unsigned int,RiArr> RLIList;
 extern RLIList rlList;
 extern Maps funcMap;

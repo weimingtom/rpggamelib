@@ -19,19 +19,19 @@ MSGManager::~MSGManager(void){
 /* 监听消息
 /************************************************************************/
 void MSGManager::msgListener(CInfo * cinfo){
-	short s=NULL;
-	memmove(&s,cinfo->zBuffer,sizeof(s));
+	unsigned short key=NULL;
+	memmove(&key,cinfo->zBuffer,sizeof(key));
 	if (strlen(cinfo->zBuffer)<3){
-		cout<<"异常消息:"<<s<<endl;
+		cout<<"异常消息:"<<key<<endl;
 		return;
 	}
-	if (funcMap.count(s)){
-		funcMap[s](cinfo);
+	if (funcMap.count(key)){
+		funcMap[key](cinfo);
 	}
 }
 /************************************************************************/
 /* 注册消息
 /************************************************************************/
-void MSGManager::msgRegister(short msgType,action aFun){
+void MSGManager::msgRegister(unsigned short msgType,action aFun){
 	funcMap[msgType]=aFun;
 }
