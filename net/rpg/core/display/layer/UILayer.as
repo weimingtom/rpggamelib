@@ -60,7 +60,7 @@ package net.rpg.core.display.layer
 			enter.addActionListener(click);
 			var initmap:JButton = new JButton("GM_MAP_INIT");
 			//GM_MAP_INIT_COMPLETE
-			var mapok:JButton = new JButton("发送2");
+			var mapok:JButton = new JButton("选择角色");
 			mapok.name = "mapok";
 			mapok.addActionListener(click);
 			var playerinfo:JButton = new JButton("GOM_PLAYER_INFO");
@@ -76,7 +76,7 @@ package net.rpg.core.display.layer
 			pwd.setDisplayAsPassword(true);
 			f.setSizeWH(435, 300);
 			f.getContentPane().setLayout(new FlowLayout());
-			f.getContentPane().appendAll(enter,initmap,mapok,playerinfo,user,pwd,post);
+			f.getContentPane().appendAll(enter,mapok,initmap,playerinfo,user,pwd,post);
 			f.show();
 		}
 		private function click(e:AWEvent):void
@@ -86,7 +86,7 @@ package net.rpg.core.display.layer
 					MSG.getinstance.dispatch(MessageType.CMT_CONNECT);
 				break;
 				case "mapok":
-					
+					MSG.getinstance.dispatch(MessageType.CMT_LOGIN_SLECT_ROLE_OK,12);
 				break;
 				case "post":
 					MSG.getinstance.dispatch(MessageType.CMT_LOGIN,user.getText(),pwd.getText());

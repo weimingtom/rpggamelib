@@ -52,7 +52,8 @@ package net.rpg.core.message.msgtype
 		{
 			MSG.getinstance.listens(MessageType.CMT_LOGIN, login);
 			MSG.getinstance.listens(MessageType.SMT_LOGIN, isLogin);
-			MSG.getinstance.listens(MessageType.SMT_POST_SELECT_ROLE, selectRole);
+			MSG.getinstance.listens(MessageType.SMT_LOGIN_INIT_EOLE_LIST, initRoleList);
+			MSG.getinstance.listens(MessageType.CMT_LOGIN_SLECT_ROLE_OK, selectRoleOk);
 		}
 		/**
 		 * 登陆服务器
@@ -74,6 +75,10 @@ package net.rpg.core.message.msgtype
 			 * NetConnect.getinstance.getNet().flush();
 			 */
 		}
+		/**
+		 * 判断是否登录成功
+		 * @param	sdb
+		 */
 		private function isLogin(sdb:GByteArray):void
 		{
 			
@@ -93,8 +98,11 @@ package net.rpg.core.message.msgtype
 				break;
 			}
 		}
-		
-		private function selectRole(sdb:GByteArray):void
+		/**
+		 * 初始化角色列表
+		 * @param	sdb
+		 */
+		private function initRoleList(sdb:GByteArray):void
 		{
 			var len:int = sdb.readUnsignedByte();
 			var arr:Array = [];
@@ -107,6 +115,19 @@ package net.rpg.core.message.msgtype
 				arr.push(obj);
 			}
 			trace(arr[0].id,arr[0].race,arr[0].sex,arr[0].name);
+		}
+		/**
+		 * 
+		 */
+		private function selectRoleOk(id:uint):void
+		{
+			var cdb:GByteArray = new GByteArray();
+			cdb.writeShort(int(MessageType.CMT_LOGIN_SLECT_ROLE_OK));
+			cdb.writeUnsignedInt(id);
+			NetConnect.getinstance.getNet().writeBytes(cdb);
+			NetConnect.getinstance.getNet().flush();
+			cdb.clear();
+			cdb = null;
 		}
 	}
 
