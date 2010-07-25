@@ -8,7 +8,7 @@ class MSGManager
 		~MSGManager(void);
 		static MSGManager & getInstance();
 		void msgListener(CInfo *);
-		void msgRegister(short,action);
+		void msgRegister(unsigned short,action);
 	private:
 		MSGManager(void);
 	private:
