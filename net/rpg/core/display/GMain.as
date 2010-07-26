@@ -15,7 +15,7 @@ package net.rpg.core.display
 		public function GMain() 
 		{
 			MSG.getinstance.listens(ResQuery.RQ_LOADE_OK,start);
-			ResQuery.getinstance.path("http://192.168.1.250/config.xml?r="+Math.random());
+			ResQuery.getinstance.path("http://192.168.1.218/config.xml?r="+Math.random());
 		}
 		
 		private function start():void

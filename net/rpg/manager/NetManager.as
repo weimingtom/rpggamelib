@@ -58,7 +58,7 @@ package net.rpg.manager
 		 */
 		private function connect():void
 		{
-			NetConnect.getinstance.createSockte("192.168.1.3", 2012);
+			NetConnect.getinstance.createSockte("192.168.1.218", 2012);
 			MSG.getinstance.remove(MessageType.CMT_CONNECT);
 		}
 		

@@ -1,6 +1,7 @@
 package net.rpg.core.net 
 {
 	import flash.utils.Dictionary;
+	import net.rpg.utils.GByteArray;
 	
 	/**
 	 * ...
@@ -80,7 +81,12 @@ package net.rpg.core.net
 			Hsock[sname] = null;
 			delete Hsock[sname];
 		}
-		
+		/**
+		 * 返回Socket连接
+		 * @param	ip
+		 * @param	port
+		 * @return
+		 */
 		public function getNet(ip:String = "", port:int = 0):GSocket
 		{
 			if (length > 1) {
@@ -90,7 +96,17 @@ package net.rpg.core.net
 			if (Hsock[sname] == "undefined" || Hsock[sname] == null) throw new Error("Socket:" + ip + "Socket获取失败,该连接不存在");
 			return Hsock[sname];
 		}
-		
+		/**
+		 * 输出数据
+		 * @param	cdb
+		 */
+		public function writeBytes(db:GByteArray):void
+		{
+			getNet().writeBytes(db);
+			getNet().flush();
+			db.clear();
+			db = null;
+		}
 	}
 
 }class Private{}
