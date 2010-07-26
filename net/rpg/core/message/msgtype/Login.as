@@ -52,8 +52,8 @@ package net.rpg.core.message.msgtype
 		{
 			MSG.getinstance.listens(MessageType.CMT_LOGIN, login);
 			MSG.getinstance.listens(MessageType.SMT_LOGIN, isLogin);
-			MSG.getinstance.listens(MessageType.SMT_LOGIN_INIT_EOLE_LIST, initRoleList);
-			MSG.getinstance.listens(MessageType.CMT_LOGIN_SLECT_ROLE_OK, selectRoleOk);
+			MSG.getinstance.listens(MessageType.SMT_POST_SELECT_ROLE, selectRole);
+			MSG.getinstance.listens(MessageType.SMT_POST_MAPID, getmapid);
 		}
 		/**
 		 * 登陆服务器
@@ -66,8 +66,7 @@ package net.rpg.core.message.msgtype
 			cdb.writeUTFBytes(MD5.hash(user));
 			//trace(MD5.hash(pwd));
 			cdb.writeUTFBytes(MD5.hash(pwd));
-			NetConnect.getinstance.getNet().writeBytes(cdb);
-			NetConnect.getinstance.getNet().flush();
+			NetConnect.getinstance.writeBytes(cdb);
 			cdb.clear();
 			cdb = null;
 			/**
@@ -76,7 +75,7 @@ package net.rpg.core.message.msgtype
 			 */
 		}
 		/**
-		 * 判断是否登录成功
+		 * 登陆状态  
 		 * @param	sdb
 		 */
 		private function isLogin(sdb:GByteArray):void
@@ -99,10 +98,10 @@ package net.rpg.core.message.msgtype
 			}
 		}
 		/**
-		 * 初始化角色列表
+		 * 选择角色
 		 * @param	sdb
 		 */
-		private function initRoleList(sdb:GByteArray):void
+		private function selectRole(sdb:GByteArray):void
 		{
 			var len:int = sdb.readUnsignedByte();
 			var arr:Array = [];
@@ -114,20 +113,27 @@ package net.rpg.core.message.msgtype
 				obj.name = sdb.readUTFBytes(14);
 				arr.push(obj);
 			}
-			trace(arr[0].id,arr[0].race,arr[0].sex,arr[0].name);
+			trace(arr[0].id, arr[0].race, arr[0].sex, arr[0].name);
+			selectOk(arr[0].id);
+			
 		}
 		/**
-		 * 
+		 * 选择结果
 		 */
-		private function selectRoleOk(id:uint):void
-		{
+		private function selectOk(id:uint):void {
 			var cdb:GByteArray = new GByteArray();
-			cdb.writeShort(int(MessageType.CMT_LOGIN_SLECT_ROLE_OK));
+			cdb.writeShort(int(MessageType.CMT_SLECT_ROLE_OK));
 			cdb.writeUnsignedInt(id);
-			NetConnect.getinstance.getNet().writeBytes(cdb);
-			NetConnect.getinstance.getNet().flush();
+			NetConnect.getinstance.writeBytes(cdb);
 			cdb.clear();
 			cdb = null;
+		}
+		
+		private function getmapid(sdb:GByteArray):void
+		{
+			var mapid:int = sdb.readByte();
+			trace(mapid);
+			
 		}
 	}
 
