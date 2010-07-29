@@ -90,6 +90,7 @@ package net.rpg.core.net
 				type = onePack.readShort();
 				MSG.getinstance.dispatch(type.toString(),onePack);
 			}
+			onePack = null;
 		}
 		
 		/**
