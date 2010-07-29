@@ -26,7 +26,7 @@ package net.rpg.core.message
 		 * 返回选择列表
 		 * 消息(U2) 角色的个数(U1) [ID(UInt4) 种族(UChar1) 性别(UChar1) 名称(14)]
 		 */
-		public static const SMT_LOGIN_INIT_EOLE_LIST:String = "10012";
+		public static const SMT_LOGIN_INIT_ROLE_LIST:String = "10012";
 		/**
 		 * 选择成功
 		 * 消息(U2) 角色ID(UInt4)

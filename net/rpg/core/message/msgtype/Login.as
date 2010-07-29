@@ -52,7 +52,7 @@ package net.rpg.core.message.msgtype
 		{
 			MSG.getinstance.listens(MessageType.CMT_LOGIN, login);
 			MSG.getinstance.listens(MessageType.SMT_LOGIN, isLogin);
-			MSG.getinstance.listens(MessageType.SMT_LOGIN_INIT_EOLE_LIST, initRoleList);
+			MSG.getinstance.listens(MessageType.SMT_LOGIN_INIT_ROLE_LIST, initRoleList);
 			MSG.getinstance.listens(MessageType.CMT_LOGIN_SLECT_ROLE_OK, selectRoleOk);
 			MSG.getinstance.listens(MessageType.SMT_POST_MAPID, getMapId);
 		}
@@ -67,14 +67,9 @@ package net.rpg.core.message.msgtype
 			cdb.writeUTFBytes(MD5.hash(user));
 			//trace(MD5.hash(pwd));
 			cdb.writeUTFBytes(MD5.hash(pwd));
-			NetConnect.getinstance.getNet().writeBytes(cdb);
-			NetConnect.getinstance.getNet().flush();
+			NetConnect.getinstance.writeBytes(cdb);
 			cdb.clear();
 			cdb = null;
-			/**
-			 * NetConnect.getinstance.getNet().writeBoolean(false);
-			 * NetConnect.getinstance.getNet().flush();
-			 */
 		}
 		/**
 		 * 判断是否登录成功
@@ -129,8 +124,7 @@ package net.rpg.core.message.msgtype
 			var cdb:GByteArray = new GByteArray();
 			cdb.writeShort(int(MessageType.CMT_LOGIN_SLECT_ROLE_OK));
 			cdb.writeUnsignedInt(id);
-			NetConnect.getinstance.getNet().writeBytes(cdb);
-			NetConnect.getinstance.getNet().flush();
+			NetConnect.getinstance.writeBytes(cdb);
 			cdb.clear();
 			cdb = null;
 		}
