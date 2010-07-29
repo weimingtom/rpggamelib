@@ -42,8 +42,9 @@ package net.rpg.core.display.layer
 		 *初始化地图 
 		 * 
 		 */
-		private function init():void
+		public function init():void
 		{
+			Map.getinstance.pushList = this;
 			addEventListener(MouseEvent.CLICK,onClick);
 		}
 		/**

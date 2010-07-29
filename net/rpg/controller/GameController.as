@@ -54,9 +54,17 @@ package net.rpg.controller
 			 */
 			NetController.getinstance.init();
 			/**
-			 * 初始化逻辑
+			 * 初始化游戏管理器
 			 */
-			GameManager.getinstance.initmsg();
+			GameManager.getinstance.init();
+			/**
+			 * 初始地图
+			 */
+			FloorLayer.getinstance.init();
+			
+			
+			
+			
 			
 			/**
 			 * 初始化视图

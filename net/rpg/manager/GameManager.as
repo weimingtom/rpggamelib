@@ -5,6 +5,7 @@ package net.rpg.manager
 	import net.rpg.core.display.map.MapStruct;
 	import net.rpg.core.loader.ResQuery;
 	import net.rpg.core.message.MSG;
+	import net.rpg.core.message.msgtype.Login;
 	/**
 	 * 游戏图层控制器
 	 * @author 随风展翅
@@ -48,6 +49,21 @@ package net.rpg.manager
 			return instance;
 		}
 		/**
+		 * 初始化
+		 */
+		public function init():void
+		{
+			initMSGMode();
+			initmsg();
+		}
+		/**
+		 * 初始化通讯模块
+		 */
+		private function initMSGMode():void
+		{
+			Login.getinstance.initmsg();
+		}
+		/**
 		 *寻路 
 		 * @param endx
 		 * @param endy
@@ -60,7 +76,7 @@ package net.rpg.manager
 		/**
 		 * 初始化消息监听
 		 */
-		public function initmsg():void
+		private function initmsg():void
 		{
 			MSG.getinstance.listens(GM_MAP_INIT, mapinit);
 			MSG.getinstance.listens(MapDataLoad.MD_MAP_LOAD_COMPLETE, initComplete);
