@@ -81,15 +81,14 @@ void postRSL(CInfo *cinfo,unsigned int id){
 /************************************************************************/
 void selectROK(CInfo *cinfo){
 	unsigned int id;
-	unsigned char mapid=12;
-	unsigned short pack=3;
+	unsigned short mapid=1;
 	unsigned short msgtype=SMT_POST_MAPID;
+	unsigned short pack=4;
 	memcpy(&id,cinfo->zBuffer+2,4);
 	ZeroMemory(cinfo->zBuffer,NET_MAX_RECV_SIZE);
-	
 	memcpy(cinfo->zBuffer,&pack,2);
 	memcpy(cinfo->zBuffer+2,&msgtype,2);
-	memcpy(cinfo->zBuffer+4,&mapid,1);
-	cinfo->wsaBuf.len=5;
+	memcpy(cinfo->zBuffer+4,&mapid,2);
+	cinfo->wsaBuf.len=6;
 	SIOCP.write(cinfo);
 }
