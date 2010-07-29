@@ -47,10 +47,20 @@ package net.rpg.controller
 		 * @param gmain
 		 * 
 		 */
-		public function init(gmain:IGMain):void
+		public function initMode(gmain:IGMain):void
 		{
-			GameManager.getinstance.initmsg();
+			/**
+			 * 初始化网络
+			 */
 			NetController.getinstance.init();
+			/**
+			 * 初始化逻辑
+			 */
+			GameManager.getinstance.initmsg();
+			
+			/**
+			 * 初始化视图
+			 */
 			client = gmain;
 			client.addChild(FloorLayer.getinstance);
 			client.addChild(UILayer.getinstance);

@@ -44,16 +44,6 @@ package net.rpg.controller
 		public function init():void
 		{
 			NetManager.getinstance.initmsg();
-			
-			
-			listenMT();
-		}
-		/**
-		 * 启动要监听消息
-		 */
-		private function listenMT():void
-		{
-			Login.getinstance.initmsg();
 		}
 	}
 
