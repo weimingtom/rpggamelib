@@ -52,8 +52,9 @@ package net.rpg.core.message.msgtype
 		{
 			MSG.getinstance.listens(MessageType.CMT_LOGIN, login);
 			MSG.getinstance.listens(MessageType.SMT_LOGIN, isLogin);
-			MSG.getinstance.listens(MessageType.SMT_POST_SELECT_ROLE, selectRole);
-			MSG.getinstance.listens(MessageType.SMT_POST_MAPID, getmapid);
+			MSG.getinstance.listens(MessageType.SMT_LOGIN_INIT_EOLE_LIST, initRoleList);
+			MSG.getinstance.listens(MessageType.CMT_LOGIN_SLECT_ROLE_OK, selectRoleOk);
+			MSG.getinstance.listens(MessageType.SMT_POST_MAPID, getMapId);
 		}
 		/**
 		 * 登陆服务器
@@ -66,7 +67,8 @@ package net.rpg.core.message.msgtype
 			cdb.writeUTFBytes(MD5.hash(user));
 			//trace(MD5.hash(pwd));
 			cdb.writeUTFBytes(MD5.hash(pwd));
-			NetConnect.getinstance.writeBytes(cdb);
+			NetConnect.getinstance.getNet().writeBytes(cdb);
+			NetConnect.getinstance.getNet().flush();
 			cdb.clear();
 			cdb = null;
 			/**
@@ -75,7 +77,7 @@ package net.rpg.core.message.msgtype
 			 */
 		}
 		/**
-		 * 登陆状态  
+		 * 判断是否登录成功
 		 * @param	sdb
 		 */
 		private function isLogin(sdb:GByteArray):void
@@ -96,12 +98,14 @@ package net.rpg.core.message.msgtype
 					
 				break;
 			}
+			sdb.clear();
+			sdb = null;
 		}
 		/**
-		 * 选择角色
+		 * 初始化角色列表
 		 * @param	sdb
 		 */
-		private function selectRole(sdb:GByteArray):void
+		private function initRoleList(sdb:GByteArray):void
 		{
 			var len:int = sdb.readUnsignedByte();
 			var arr:Array = [];
@@ -112,27 +116,33 @@ package net.rpg.core.message.msgtype
 				obj.sex = sdb.readUnsignedByte();
 				obj.name = sdb.readUTFBytes(14);
 				arr.push(obj);
+				sdb.clear();
+				sdb = null;
 			}
-			trace(arr[0].id, arr[0].race, arr[0].sex, arr[0].name);
-			selectOk(arr[0].id);
-			
+			trace(arr[0].id,arr[0].race,arr[0].sex,arr[0].name);
 		}
 		/**
-		 * 选择结果
+		 * 发送选择的角色id
 		 */
-		private function selectOk(id:uint):void {
+		private function selectRoleOk(id:uint):void
+		{
 			var cdb:GByteArray = new GByteArray();
-			cdb.writeShort(int(MessageType.CMT_SLECT_ROLE_OK));
+			cdb.writeShort(int(MessageType.CMT_LOGIN_SLECT_ROLE_OK));
 			cdb.writeUnsignedInt(id);
-			NetConnect.getinstance.writeBytes(cdb);
+			NetConnect.getinstance.getNet().writeBytes(cdb);
+			NetConnect.getinstance.getNet().flush();
 			cdb.clear();
 			cdb = null;
 		}
-		
-		private function getmapid(sdb:GByteArray):void
+		/**
+		 * 接收服务器发送的角色所在地图ID
+		 */
+		private function getMapId(sdb:GByteArray):void
 		{
-			var mapid:int = sdb.readByte();
+			var mapid:int = sdb.readUnsignedShort();
 			trace(mapid);
+			sdb.clear();
+			sdb = null;
 			
 		}
 	}
