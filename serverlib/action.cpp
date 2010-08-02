@@ -81,7 +81,7 @@ void postRSL(CInfo *cinfo,unsigned int id){
 /************************************************************************/
 void selectROK(CInfo *cinfo){
 	unsigned int id;
-	unsigned short mapid=1;
+	unsigned short mapid=0;
 	unsigned short msgtype=SMT_POST_MAPID;
 	unsigned short pack=4;
 	memcpy(&id,cinfo->zBuffer+2,4);

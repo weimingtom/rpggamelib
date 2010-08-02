@@ -1,9 +1,8 @@
 package net.rpg.manager 
 {
-	import net.rpg.core.display.map.Map;
+	import flash.geom.Point;
+	import net.rpg.controller.FloorController;
 	import net.rpg.core.display.map.MapDataLoad;
-	import net.rpg.core.display.map.MapStruct;
-	import net.rpg.core.loader.ResQuery;
 	import net.rpg.core.message.MSG;
 	import net.rpg.core.message.msgtype.Login;
 	/**
@@ -20,10 +19,7 @@ package net.rpg.manager
 		
 		/**=========================================消息开始==================================================**/
 		
-		/**
-		 * 地图初始化消息
-		 */
-		public static const GM_MAP_INIT:String = "gm_map_init";
+		
 		
 		
 		/**=========================================消息结束==================================================**/
@@ -53,8 +49,8 @@ package net.rpg.manager
 		 */
 		public function init():void
 		{
-			initMSGMode();
 			initmsg();
+			initMSGMode();
 		}
 		/**
 		 * 初始化通讯模块
@@ -78,43 +74,16 @@ package net.rpg.manager
 		 */
 		private function initmsg():void
 		{
-			MSG.getinstance.listens(GM_MAP_INIT, mapinit);
 			MSG.getinstance.listens(MapDataLoad.MD_MAP_LOAD_COMPLETE, initComplete);
-		}
-		private function mapinit(id:String):void
-		{ 
-			initMPStruct(id);
-			MapDataLoad.getinstance.load();
 		}
 		/**
 		 * 加载完成
 		 */
 		private function initComplete():void
 		{
-			
+			FloorController.getinstance.map.setUrl=FloorController.getinstance.map.achieveTile(new Point(80,90));
 		}
-		/**
-		 * 地图结构填充
-		 * 
-		 */
-		private function initMPStruct(id:String):void
-		{
-			var mapinfo:Object=ResQuery.getinstance.getMapData(id);
-			MapStruct.id=mapinfo.id;
-			MapStruct.width=mapinfo.width;
-			MapStruct.height=mapinfo.height;
-			MapStruct.path=mapinfo.path;
-			MapStruct.cwidth=800;
-			MapStruct.cheight = 600;
-			MapStruct.tilef=(mapinfo.path+"/"+mapinfo.tilef);
-			MapStruct.unitf=(mapinfo.path+"/"+mapinfo.unitf);
-			//TODO
-			MapStruct.focus.x=int(MapStruct.cwidth/2);
-			MapStruct.focus.y=int(MapStruct.cheight/2);
-			MapStruct.SetBroder(mapinfo.fixwidth,mapinfo.fixheight);
-			MapStruct.MapDataInit();
-			Map.getinstance.init();
-		}
+		
 	}
 
 }class Private{}

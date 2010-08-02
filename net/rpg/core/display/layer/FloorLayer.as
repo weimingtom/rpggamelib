@@ -11,32 +11,9 @@ package net.rpg.core.display.layer
 	 */
 	public class FloorLayer extends Gobj implements IFloorLayer
 	{
-		
-		/**
-		 *单例句柄
-		 */
-		private static var instance:FloorLayer = null;
-		
-		
-		public function FloorLayer(access:Private)
+		public function FloorLayer()
 		{
-			if(access==null)
-			{
-				throw new Error("no access the Class");
-			}
-		}
-		/**
-		 *获取实例 
-		 * @return 
-		 * 
-		 */
-		public static function get getinstance():FloorLayer
-		{
-			if (instance==null)
-			{
-				instance=new FloorLayer(new Private());
-			}
-			return instance;
+			super();
 		}
 		/**
 		 *初始化地图 
@@ -44,7 +21,6 @@ package net.rpg.core.display.layer
 		 */
 		public function init():void
 		{
-			Map.getinstance.pushList = this;
 			addEventListener(MouseEvent.CLICK,onClick);
 		}
 		/**
@@ -75,4 +51,4 @@ package net.rpg.core.display.layer
 		
 	}
 
-}class Private{}
+}

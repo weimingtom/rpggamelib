@@ -3,6 +3,7 @@ package net.rpg.core.message.msgtype
 	import net.rpg.core.message.MessageType;
 	import net.rpg.core.message.MSG;
 	import net.rpg.core.net.NetConnect;
+	import net.rpg.manager.FloorManager;
 	import net.rpg.utils.GByteArray;
 	import net.rpg.utils.md5.MD5;
 	/**
@@ -137,7 +138,7 @@ package net.rpg.core.message.msgtype
 			trace(mapid);
 			sdb.clear();
 			sdb = null;
-			
+			MSG.getinstance.dispatch(FloorManager.GM_MAP_INIT,mapid);
 		}
 	}
 

@@ -1,7 +1,7 @@
 package net.rpg.controller 
 {
+	import net.rpg.core.display.Game;
 	import net.rpg.core.display.IGMain;
-	import net.rpg.core.display.layer.FloorLayer;
 	import net.rpg.core.display.layer.UILayer;
 	import net.rpg.manager.GameManager;
 	/**
@@ -11,15 +11,21 @@ package net.rpg.controller
 	 */
 	public class GameController
 	{
-		/**
-		 * 客户端窗口对象
-		 */
-		private var client:IGMain = null;
 		
 		/**
 		 *单利句柄
 		 */
 		private static var instance:GameController = null;
+		
+		/**
+		 * 客户端窗口对象
+		 */
+		private var client:IGMain = null;
+		/**
+		 * 游戏窗体
+		 */
+		private var game:Game = null;
+		
 		
 		
 		public function GameController(access:Private)
@@ -28,6 +34,7 @@ package net.rpg.controller
 			{
 				throw new Error("no access the Class");
 			}
+			game = new Game();
 		}
 		/**
 		 *获取实例 
@@ -60,9 +67,11 @@ package net.rpg.controller
 			/**
 			 * 初始地图
 			 */
-			FloorLayer.getinstance.init();
-			
-			
+			FloorController.getinstance.init();
+			/**
+			 * 初始化场景
+			 */
+			SceneController.getinstance.init();
 			
 			
 			
@@ -70,8 +79,11 @@ package net.rpg.controller
 			 * 初始化视图
 			 */
 			client = gmain;
-			client.addChild(FloorLayer.getinstance);
 			client.addChild(UILayer.getinstance);
+			game.addChild(FloorController.getinstance.floor);
+			game.addChild(SceneController.getinstance.scene);
+			client.addChild(game);
+			
 		}
 	}
 

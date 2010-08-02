@@ -85,35 +85,13 @@ package net.rpg.core.display.map
 		 */
 		private var maxfocus:Point = null;
 		
-		/**
-		 *单例句柄
-		 */
-		private static var instance:Map = null;
-		
-		public function Map(access:Private)
+		public function Map()
 		{
-			if(access==null)
-			{
-				throw new Error("no access the Class");
-			}
 			rect = new Rectangle();
 			focus = new Point();
 			maxfocus = new Point();
 			goal = new Point();
 			mapList = new Dictionary();
-		}
-		/**
-		 *获取实例 
-		 * @return 
-		 * 
-		 */
-		public static function get getinstance():Map
-		{
-			if (instance==null)
-			{
-				instance=new Map(new Private());
-			}
-			return instance;
 		}
 		/**
 		 * 初始化地图
@@ -166,7 +144,6 @@ package net.rpg.core.display.map
 			
 			if (rect.x < 0) rect.x = 0;
 			if (rect.y < 0) rect.y = 0;
-			
 			
 			return rect;
 		}
@@ -325,4 +302,4 @@ package net.rpg.core.display.map
 			return new Point(xtile - (ytile&1), ytile);
 		}
 	}
-}class Private{}
+}
