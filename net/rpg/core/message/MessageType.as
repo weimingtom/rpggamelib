@@ -1,9 +1,9 @@
 package net.rpg.core.message 
 {
 	/**
-	 * 消息类型常量
 	 * ...
-	 * @author ...
+	 * @author 随风展翅
+	 * QQ:343717442
 	 */
 	public class MessageType
 	{
